@@ -1,0 +1,281 @@
+Riot Act April 29 1992 by Ai,Poet,0.0281690140845
+Twenty-year Marriage by Ai,Poet,0.014598540146
+To Dorothy by Marvin Bell,Poet,0.0192307692308
+To an Adolescent Weeping Willow by Marvin Bell,Poet,0.0379146919431
+Dream Song 26: The glories of the world struck me by John Berryman,Poet,0.0234375
+Dream Song 172: Your face broods by John Berryman,Poet,0.00813008130081
+The Fish by Elizabeth Bishop,Poet,0.015873015873
+Warning to the Reader by Robert Bly,Poet,0.0295857988166
+The Russian by Robert Bly,Poet,0.00440528634361
+A Lovely Love by Gwendolyn Brooks,Poet,0.00934579439252
+The Choir by Olga Broumas,Poet,0.0227272727273
+at the cemetery walnut grove plantation south carolina 1989 by Lucille Clifton,Poet,0.0
+scar by Lucille Clifton,Poet,0.0454545454545
+Japan by Billy Collins,Poet,0.0123456790123
+Writing in the Afterlife by Billy Collins,Poet,0.0125523012552
+The Language by Robert Creeley,Poet,0.0192307692308
+The Warning by Robert Creeley,Poet,0.0
+Adultery by James Dickey,Poet,0.0122448979592
+Tomatoes by Stephen Dobyns,Poet,0.0178571428571
+Fragments by Stephen Dobyns,Poet,0.015503875969
+Wingfoot Lake by Rita Dove,Poet,0.037037037037
+The Stairway by Stephen Dunn,Poet,0.0240384615385
+The Strange People by Louise Erdrich,Poet,0.0225563909774
+New Vows by Louise Erdrich,Poet,0.015873015873
+Sexual Jealousy by Carol Frost,Poet,0.0230769230769
+The Undressing by Carol Frost,Poet,0.0141843971631
+To Kill a Deer by Carol Frost,Poet,0.0199004975124
+Nostos Louise Gluck,Poet,0.0645161290323
+Celestial Music by Louise Gluck,Poet,0.0220385674931
+How Simile Works by Albert Goldbarth,Poet,0.0288461538462
+The Older Child by Kimiko Hahn,Poet,0.0363636363636
+The Porcelain Couple by Donald Hall,Poet,0.0202898550725
+Reuben Reuben by Michael S. Harper,Poet,0.0151515151515
+Our Lady of the Snows by Robert Hass,Poet,0.0390625
+The Image by Robert Hass,Poet,0.0224719101124
+Those Winter Sundays by Robert Hayden,Poet,0.0
+This Night by William Heyen,Poet,0.0173913043478
+Playing Dead by Andrew Hudgins,Poet,0.0285714285714
+Degrees Of Gray In Philipsburg by Richard Hugo,Poet,0.0223642172524
+Absences by Donald Justice,Poet,0.0625
+Variations On A Text By Vallejo by Donald Justice,Poet,0.0448275862069
+After Making Love we Hear Footsteps by Galway Kinnell,Poet,0.0166666666667
+Blackberry Eating by Galway Kinnell,Poet,0.031914893617
+Thrall by Carolyn Kizer,Poet,0.0512820512821
+The Intruder by Carolyn Kizer,Poet,0.004
+Facing It by Yusef Komunyakaa,Poet,0.0223463687151
+Audacity of the Lower Gods by Yusef Komunyakaa,Poet,0.02
+Heav[?1049h[?1h=[?12;25h[?12l[?25h[27m[m[H[2J[?25l[1;1H[38;5;81mimport[m sys, re, string
+[38;5;81mfrom[m helperFunctions [38;5;81mimport[m mean, stripPunctuation
+
+wordF = [1m[96mopen[m(sys.argv[[95m1[m], [95m"r"[m)
+
+wordList = []
+[93mfor[m l [93min[m wordF:
+    l = l.strip()
+    wordList.append(l)
+
+f = [1m[96mopen[m(sys.argv[[95m2[m], [95m"r"[m)
+
+[93mfor[m l [93min[m f:
+    count = [95m0[m
+    l = l.strip()
+    toks = l.split([95m"| "[m)
+    title_author = toks[[95m0[m].replace([95m","[m, [95m""[m)
+    poemType = toks[[95m1[m]
+    words = [95m" "[m.join(toks[[95m2[m:]).lower()
+    words = stripPunctuation(words)
+    words = words.split()
+    [93mfor[m word [93min[m words:[23;8H [93mif[m word [93min[m wordList:[24;12H count +=[95m1[m
+    normalizedCount = [1m[96mfloat[m(count) / [1m[96mfloat[m([1m[96mlen[m(words))
+    [1m[96mprint[m title_author + [95m","[m + poemType + [95m","[m + [1m[96mstr[m(normalizedCount)
+
+[94m~                                                                                                                                                             [29;1H~                                                                                                                                                             [30;1H~                                                                                                                                                             [31;1H~                                                                                                                                                             [32;1H~                                                                                                                                                             [33;1H~                                                                                                                                                             [34;1H~                                                                                                                                                             [35;1H~                                                                                                                                                             [1;1H[?12l[?25h[36;1H[m[?1l>[?1049lVim: Caught deadly signal HUP
+Vim: Finished.
+[36;1Hless Woods by Richard Wilbur,Poet,0.00917431192661
+The Singing by C. K. Williams,Poet,0.0143266475645
+More Blues and the Abstract Truth by C.D. Write,Poet,0.0243902439024
+Approximately Forever by C.D. Wright,Poet,0.0138888888889
+Clear Night by Charles Wright,Poet,0.016393442623
+Lying in a Hammock at William Duffy's Farm in Pine Island Minnesota by James Wright,Poet,0.047619047619
+A Blessing by James Wright,Poet,0.0231213872832
+Only but a dream,Amateur,0.0301886792453
+Dr. Heinz Doofenshmirtz,Amateur,0.0340136054422
+Freedom,Amateur,0.10447761194
+The foolish man,Amateur,0.0160642570281
+Live for the moment,Amateur,0.0705882352941
+Eaten up,Amateur,0.0909090909091
+Gates of Goodbye,Amateur,0.0522875816993
+true beauty,Amateur,0.18
+A Walk in the Park,Amateur,0.0786516853933
+The two of them,Amateur,0.0
+Your life,Amateur,0.038961038961
+Thing we have lost in fire,Amateur,0.0281690140845
+Mother Rabbit,Amateur,0.0
+Aurora,Amateur,0.0344827586207
+Boy to a man,Amateur,0.0166666666667
+Goodbye poem,Amateur,0.0234375
+Read me,Amateur,0.0151515151515
+Angel eyes,Amateur,0.0102040816327
+Another Chapter,Amateur,0.0654205607477
+Self Reserved,Amateur,0.0404624277457
+Yet the sun still sleeps. ,Amateur,0.0217391304348
+Let love be as one,Amateur,0.0396825396825
+Charlotte Emily and Anne,Amateur,0.0260869565217
+Cappuccino,Amateur,0.0315315315315
+Pleasure trip,Amateur,0.0243902439024
+I thought I knew,Amateur,0.070652173913
+Where is our fate formed?,Amateur,0.0215053763441
+Sometimes,Amateur,0.0361445783133
+Life,Amateur,0.0223214285714
+You can cry,Amateur,0.0
+Breaking heart,Amateur,0.00632911392405
+And a Merry Christmas to You,Amateur,0.102459016393
+Everybody likes my clock,Amateur,0.0330578512397
+I nearly fell,Amateur,0.00574712643678
+Denial,Amateur,0.056338028169
+Winter silence,Amateur,0.0
+Demons and scars,Amateur,0.0190476190476
+The first time I saw you. ,Amateur,0.0446927374302
+Sister,Amateur,0.0481927710843
+For Thee,Amateur,0.0
+Precious Lord,Amateur,0.0333333333333
+Love is like,Amateur,0.0384615384615
+Life2,Amateur,0.0188679245283
+To Be Young And Naive,Amateur,0.0405904059041
+Why I love You,Amateur,0.0
+First Love,Amateur,0.0169971671388
+Miss You,Amateur,0.0549450549451
+THE END HAD COME,Amateur,0.063829787234
+BABY OF POVERTY,Amateur,0.05
+Broken Home,Amateur,0.0487804878049
+My Thoughts On Love,Amateur,0.0314685314685
+Take Me Back,Amateur,0.0479041916168
+A Friend Is,Amateur,0.0126582278481
+THE GARDEN,Amateur,0.0492957746479
+Insomnia,Amateur,0.0221238938053
+Unrequited Love,Amateur,0.0454545454545
+Wavering,Amateur,0.0281690140845
+Garden of Shattered Dreams,Amateur,0.0388349514563
+Thinking Of You,Amateur,0.0247933884298
+My heart bleeds,Amateur,0.0153846153846
+Time Isn't Always a good thing,Amateur,0.0438596491228
+Is It Really Love,Amateur,0.0185185185185
+Same Ole' Story,Amateur,0.0571428571429
+Restored,Amateur,0.037037037037
+Do You?,Amateur,0.0519480519481
+Adoption is Love,Amateur,0.0161290322581
+Road to Happiness,Amateur,0.0217391304348
+Untitled 1,Amateur,0.025641025641
+Reflection,Amateur,0.010101010101
+A DREAM WITHIN A DREAM,Amateur,0.031007751938
+Waiting,Amateur,0.0137931034483
+The War,Amateur,0.0588235294118
+On a Moonlit Night,Amateur,0.02
+Traipsing on Bantayan Shore,Amateur,0.0261780104712
+you are my angel,Amateur,0.0111111111111
+I Know,Amateur,0.0454545454545
+The Way That You Left Me,Amateur,0.0261627906977
+Waiting for Love,Amateur,0.0
+a love without good-byes,Amateur,0.048275862069
+Wail of a wave,Amateur,0.0295857988166
+Your still here,Amateur,0.029702970297
+Why?,Amateur,0.0135593220339
+Always on my mind.,Amateur,0.0131578947368
+Lonely in the dark room ",Amateur,0.0165289256198
+Untitled 2,Amateur,0.03125
+As One,Amateur,0.0519480519481
+life goes on,Amateur,0.047619047619
+Everlasting Love,Amateur,0.025974025974
+ethics of the blacks,Amateur,0.0
+Hazed Maze,Amateur,0.0429447852761
+ME AND YOU,Amateur,0.0714285714286
+When you left,Amateur,0.00917431192661
+"MAGIC",Amateur,0.018691588785
+TOGETHER. FOREVER!,Amateur,0.0
+YOU ARE MY EVERYTHING,Amateur,0.0288461538462
+Believe in Miracles !,Amateur,0.025974025974
+A Lie,Amateur,0.0175438596491
+I love you,Amateur,0.0180722891566
+"It",Amateur,0.0380952380952
+Memories,Amateur,0.0654761904762
+Growing Old by Matthew Arnold,19th,0.0309734513274
+Twenty-First. Night. Monday by Anna Akhmatova,19th,0.0375
+Autumnal Sonnet by William Allingham,19th,0.0796460176991
+The Window by Conrad Aiken,19th,0.0223214285714
+Sonnet 32 - The first time that the sun rose on thine oath by Elizabeth Barrett Browning,19th,0.0322580645161
+My Last Duchess by Robert Browning,19th,0.0170575692964
+My Earlier Life by Charles Baudelaire,19th,0.0252100840336
+The South Country by Hilaire Belloc,19th,0.0222772277228
+The General Public by Stephen Vincent Benet,19th,0.0143266475645
+Epitaph For A Romantic Woman by Louise Bogan,19th,0.0
+Victory by Rupert Brooke,19th,0.00961538461538
+I Never Loved You More by Bertolt Brecht,19th,0.0588235294118
+Stanza by Emily Bronte,19th,0.0320512820513
+The Missionary by Charlotte Bronte,19th,0.0383509108341
+Dora by Thomas Edward Brown,19th,0.0102040816327
+My Feet by Gelett Burgess,19th,0.04
+The Stranger by Aleksandr Blok,19th,0.0352941176471
+While yet we wait for spring and from the dry by Robert Seymour Bridges,19th,0.0357142857143
+The Captive Dove by Anne Bronte,19th,0.0169491525424
+The Young that Died in Beauty by William Barnes,19th,0.0520446096654
+The House That Was by Laurence Binyon,19th,0.0230769230769
+At Variance by Ellis Parker Butler,19th,0.0227272727273
+Punctuality by Lewis Carroll,19th,0.0814814814815
+In the night by Stephen Crane,19th,0.0683229813665
+Independence by Aleister Crowley,19th,0.0357142857143
+To Memory by Mary Elizabeth Coleridge,19th,0.0123456790123
+The Visible The Untrue by Hart Crane,19th,0.0243902439024
+With Whom is no Variableness Neither Shadow of Turning by Arthur Hugh Clough,19th,0.1
+Who Goes Home? by G. K. Chesterton,19th,0.0102040816327
+Since Nine O'Clock by Constantine P. Cavafy,19th,0.0633802816901
+The Heart of Night by Bliss Carman,19th,0.0471698113208
+I died for Beauty -- but was scarce by Emily Dickinson,19th,0.0724637681159
+Douglass by Paul Laurence Dunbar,19th,0.0
+Pear Tree by Hilda Doolittle,19th,0.046875
+Departure by Henry Van Dyke,19th,0.00719424460432
+Money by William Henry Davies,19th,0.0272108843537
+Song of a Train by John Davidson,19th,0.0167597765363
+Sky Song by Robert Desnos,19th,0.0
+Spring Thunder by Mark van Doren,19th,0.0344827586207
+The Moon Maiden's Song by Ernest Dowson,19th,0.101265822785
+Portrait of a Lady by T. S. Eliot,19th,0.0375
+Ode To Beauty by Ralph Waldo Emerson,19th,0.0235294117647
+Other Children by Paul Eluard,19th,0.0508474576271
+Henry the Seventh by Marriott Edgar,19th,0.0159292035398
+Dust of Snow by Robert Frost,19th,0.0294117647059
+A Valentine by Eugene Field,19th,0.0
+On Giving by Robert Graves,19th,0.0144927536232
+O Singer in Brown by Dame Mary Gilmore,19th,0.0
+A Broken Appointment by Thomas Hardy,19th,0.042735042735
+Pied Beauty by Gerard Manley Hopkins,19th,0.0379746835443
+The Boys by Oliver Wendell Holmes,19th,0.0321100917431
+The True Lover by A. E. Housman,19th,0.0173913043478
+The Poet by Hermann Hesse,19th,0.0407239819005
+I am the Reaper by William Ernest Henley,19th,0.0483870967742
+GONE by Henrik Ibsen,19th,0.0196078431373
+Gentle Lady Do Not Sing by James Joyce,19th,0.0212765957447
+Contemplation Of The Sword by Robinson Jeffers,19th,0.0339805825243
+A Calendar of Sonnets: May by Helen Hunt Jackson,19th,0.0416666666667
+The Ballad of the King's Jest by Rudyard Kipling,19th,0.0280082987552
+Wealth by Joyce Kilmer,19th,0.0104166666667
+Ode to the Northeast Wind by Charles Kingsley,19th,0.027397260274
+An April Day by Henry Wadsworth Longfellow,19th,0.0234741784038
+The Faithless Wife by Federico Garcia Lorca,19th,0.0140845070423
+In the Street by Henry Lawson,19th,0.0274914089347
+Science-fiction Cradlesong by C. S. Lewis,19th,0.0141843971631
+The Pobble Who Has No Toes by Edward Lear,19th,0.0117302052786
+Patterns by Amy Lowell,19th,0.0214395099541
+Butterfly by David Herbert Lawrence,19th,0.00719424460432
+The Dandelion by Vachel Lindsay,19th,0.0571428571429
+From One Augur to Another by Emma Lazarus,19th,0.0181818181818
+A Song Of Eternity In Time by Sidney Lanier,19th,0.0178571428571
+A Reminiscence by Amy Levy,19th,0.0506329113924
+Baptism by Claude McKay,19th,0.0185185185185
+At Ease by Walter de la Mare,19th,0.04
+Apostrophe To Man by Edna St. Vincent Millay,19th,0.020202020202
+The Morning Walk by A. A. Milne,19th,0.0175438596491
+A Ballad of John Silver by John Masefield,19th,0.00342465753425
+Robert Fulton Tanner by Edgar Lee Masters,19th,0.030303030303
+Butterfly Laughter by Katherine Mansfield,19th,0.0357142857143
+Near Avalon by William Morris,19th,0.01
+Quebec by John McCrae,19th,0.0
+An Address to Shakespeare by William Topaz McGonagall,19th,0.0203488372093
+Modern Love XLV: It Is the Season by George Meredith,19th,0.0381679389313
+At Nightfall by Lucy Maud Montgomery,19th,0.0231481481481
+Cradle Song by Sarojini Naidu,19th,0.0140845070423
+Exposure by Wilfred Owen,19th,0.0206489675516
+The City In The Sea by Edgar Allan Poe,19th,0.021472392638
+A Fairly Sad Tale by Dorothy Parker,19th,0.0248447204969
+The Needle by Ezra Pound,19th,0.0614035087719
+Camouflage by Andrew Barton Paterson,19th,0.00829875518672
+What Would I Give by Christina Rossetti,19th,0.0
+Rememberance by Rainer Maria Rilke,19th,0.039603960396
+Karma by Edwin Arlington Robinson,19th,0.0181818181818
+Frolic by George William Russell,19th,0.0131578947368
+Chicago by Carl Sandburg,19th,0.0104529616725
+The Snow Man by Wallace Stevens,19th,0.037037037037
+The Mermaid by Lord Alfred Tennyson,19th,0.00990099009901
+Tears by Walt Whitman,19th,0.0390625
+The Great Figure by William Carlos Williams,19th,0.0
+A Prayer For My Daughter by William Butler Yeats,19th,0.0421052631579

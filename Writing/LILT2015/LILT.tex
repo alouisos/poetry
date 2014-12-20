@@ -1,0 +1,326 @@
+\documentclass{book}
+
+\usepackage[ISSUE]{liltcsli}
+
+%\raggedbottom   % Uncomment this line if large diagrams cause vertical gaps.
+
+\hfuzz = 2pt     % No warnings about margin overhangs less than this amount.
+
+%\crop[]         % Uncomment for centered pages.
+%\crop[cam]      % Uncomment for crosshairs that show corners of each page.
+%\crop[frame]    % Uncomment for rectangle that shows edges of each page.
+
+
+\usepackage[comma]{natbib}  % CSLI Pubs favored bibliography package.
+\usepackage{chapterbib}     % Makes a section out of References
+
+
+% Create your own separate style file and load here to avoid cluttering
+% up the preamble more than necessary.  There should be no definitions,
+% etc. after the \begin{document} command.
+%\usepackage{mymacros}
+%\usepackage{times}
+\usepackage{latexsym}
+\usepackage{epsfig}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%usepackage{pslatex}
+%\usepackage{rotating}
+\usepackage[english]{babel}
+\selectlanguage{english}
+%%\usepackage{makeidx,color}
+\usepackage{gb4e}
+\usepackage{amsfonts}
+
+
+\volumeissue {1}{to be filled in}
+\monthyear   {to be filled in}{2014}
+%each issue is one article
+\title       {How much depends on a red wheel barrow}
+\subtitle    {A computational analysis of Imagism and its influence across time and expertise}
+\author      {Justine T. Kao\affiliation{Department of Psychology, Stanford University} {Dan Jurafsky\affiliation{Department of Linguistics, Stanford University}}}
+
+\begin{document}
+
+\section*{Abstract}
+How do standards of poetic beauty vary as a function of time and expertise? We used computational methods to compare the stylistic features of poems written by 19th century professional poets, contemporary professional poets, and contemporary amateur poets. Building upon techniques designed to analyze style and sentiment in texts, we examined elements of poetic craft such as imagery, sound devices, emotive language, and diction. We found that contemporary professional poets used significantly more concrete words than 19th century poets, fewer emotional words, and more complex sound devices. These changes are consistent with the tenets of Imagism, an early 20th-century literary movement. Further analyses showed that contemporary amateur poets resembled 19th century professional poets more than contemporary professional poets on these dimensions, suggesting that elite standards of poetic beauty in the past ``trickled down'' to influence amateur works in the present. Our results highlight the influence of Imagism on the modern aesthetic and reveal the dynamics between ``high'' and ``low'' art. We suggest that computational linguistics may shed important light on the forces and trends that shape poetic style.
+
+\clearpage
+
+\section{Introduction} 
+From Homer's epics, to Li Po's elegant verses, to Billy Collins' charming and often startling portraits of everyday life, poetry has been widely celebrated across languages, cultures, and time. Countless readers have experienced the power of a beautiful poem; however, an astute reader may notice that this power takes a different form in Shakespeare's measured sonnets than it does in Pablo Neruda's lush poetry. In this paper, we are interested in the forces and elements that shape the aesthetic standards of poetry. In particular, how do literary movements transform ideals of poetic beauty? How do changes in aesthetic standards impact poets with high versus low levels of expertise? Can we characterize this transformation using precise quantitative methods and analyze its influence on a large scale? 
+
+%\subsection{Artistic change}
+Many literary critics, historians, and social scientists have studied artistic change and proposed theories about its inception and development. These scholars have approached artistic change from the perspective of direct influence among artists \citep{clayton1991influence},  legitimation of new or previously ignored art forms due to social change \citep{baumann2007general}, and the dynamics between high and low social classes \citep{simmel1957fashion}. This diversity of approaches suggests that a holistic view of artistic change should incorporate the influence of individual artists as well as more general forces such as class dynamics. While the ideas proposed in these works are enlightening and influential, the methods used in these fields have been mostly qualitative, making it difficult to draw objective and data-driven conclusions about large bodies of texts.
+
+ \cite{martindale1990clockwork} was one of the first to use quantitative methods to comprehensively analyze a sizable collection of artwork across several time periods. His analysis showed that visual, verbal, and musical art all tend towards higher complexity over time. While this research presents compelling quantitative evidence to support a theory of artistic change, it does not take into account historical context; instead, it treats the force of change as uniform across time and space. Furthermore, Martindale regards poetry as a product of the elite, largely overlooking poetry generated and consumed by the masses. While this approach sheds light on broad patterns of artistic change, it fails to consider the ways in which this force of change acts upon different groups of artists.
+
+In this paper, we apply the same degree of quantitative rigor to examine changes surrounding a specific literary movement: Imagism. Focusing on a particular movement gives us a clearer view of whether and how powerful literary leaders can dramatically shift the standards of poetic beauty within a short amount of time. Furthermore, by comparing the effect of this movement on elite poets and amateur poets, we also aim to explore the dynamics between high and low art. 
+
+%\subsection{The Imagist movement}
+
+We chose to focus on the Imagist movement for two reasons. First, Imagism is regarded by many literary critics as ``the beginning of modern literature in English'' \citep{pratt1992imagism}. Leaders of the Imagism movement articulated and championed some of the principles of craft still taught in creative writing workshops today, such as the well-worn advice to show and not tell \citep{PoetsCompanion, Burroway}. If the Imagism movement has such a strong influence on modern aesthetic standards, then we should find significant differences between the styles of poems written prior to and following the movement. Second, while the work of amateur poets prior to the 21st century are mostly undocumented, the Internet now enables easy dissemination and documentation of poems produced by the masses; it is now possible to collect poems not only from modern anthologized poets, but also from modern amateur poets who published their work on the Internet. By choosing a movement closer to our times, we are able to compare the influence of Imagism on poems written by poets with vastly different levels of skills and formal training. 
+
+Given its significance, the Imagism movement was surprisingly small in terms of scale. The movement officially launched in 1912 and ended in 1917, involving only a handful of English and American poets, including Ezra Pound, Amy Lowell, William Carlos Williams, and James Joyce. Ezra Pound is regarded as the intellectual leader of the movement (although Amy Lowell took over soon afterwards, not without some drama). Imagism is often construed as a reaction against Georgian and Victorian styles, which are characterized by abstract and sentimental language \citep{frank1991idea}. The Imagists articulated their aesthetic ideals in an anthology published in 1916, titled ``Some Imagist Poets.'' Here we list the six tenets they proposed, modified for brevity:
+\begin{itemize}
+\item[1.] To use the language of common speech, but to employ always the exact word, not the nearly-exact, nor the merely decorative word.
+\item[2.] To create new rhythms---as the expression of new moods---and not to copy old rhythms, which merely echo old moods. 
+\item[3.] To allow absolute freedom in the choice of subject.
+\item[4.] To present an image. We believe that poetry should render particulars exactly and not deal in vague generalities.
+\item[5.] To produce poetry that is hard and clear, never blurred nor indefinite.
+\item[6.] Finally, concentration is of the very essence of poetry.
+\end{itemize}
+
+These central tenets of the Imagism movement are embodied in Pound's poem titled \emph{In a Station of the Metro}, published in \emph{Poetry} magazine in 1913:
+
+\begin{verse}
+\emph{The apparition of these faces in the crowd;\\
+Petals on a wet, black bough.}
+\end{verse}
+
+In fourteen words, the poem constructs a clear and compelling image that conveys an abstract emotional experience without explicitly describing it. The poem does not follow a strict meter or rhyme scheme; instead, the relationship between the two lines is one of imagery rather than one of sound. The image of faces in the crowd is equated with an image of petals on a bough, remnants of flowers that had just been separated from the tree after rain. A sense of ephemerality is evoked by the precise and concrete image of these delicate petals, which lingers in the reader's mind for much longer than an abstract statement about life's transience. According to Imagists, the work of a great poet is to select the right image that causes the reader to experience a particular emotion or infer a particular reality \citep{hamilton2004toward}. As Pound said, 
+``The gulf between evocation and description is the unbridgeable difference between genius and talent.'' 
+
+
+\section{Features of Imagism}
+The tenets articulated in the Imagist manifesto form the basis of our analysis. In order to determine the degree to which a particular poem conforms to Imagist ideals, we first define specific features that correlate with each of these tenets. We then measure the number of times a poem uses these features. By comparing these features across different sets of poems, we can identify the amount of Imagism's influence on poets from different time periods and with varying levels of expertise. Here we motivate and describe the set of features selected for this purpose.
+
+\subsection{Concrete imagery}
+Imagists put great emphasis on depicting concrete, specific objects and avoiding abstractions and generalizations \citep{aldington1916some}. We quantified the degree of concreteness in poems using predefined lexicons and psycholinguistic measures. The Harvard General Inquirer \citep{Inquirer+1966} consists of $182$ word categories, including a category for words referring to concrete objects (Object: $661$ words) and one for words referring to abstract concepts (ABS: $276$ words). We computed an \emph{Object} score for each poem by counting the number of words that appear in the object category and normalizing it by the total number of words in the poem. We computed an \emph{Abstract} score by counting and normalizing the number of words that appear in the ABS category. For more fine-grained psycholinguistic measures of imageability, we used the MRC Psycholinguistic Database \citep{wilson1988mrc}, which contains imageability ratings for $4954$ words \citep{coltheart1981mrc}. We first normalized the imageability ratings by z-scoring them. We then derived an \emph{Imageability} score for each poem by computing the average z-scored imageability rating for all of the words in the poem that appeared in the database. Finally, we used z-scored concreteness ratings for $39,955$ words collected by \citet{brysbaert2013concreteness} to compute a \emph{Concreteness} score for each poem. Section ZZZ will provide a comparison of these measures. 
+%TODO
+\subsection{Emotional language}
+As seen in Pound's \emph{In a Station of the Metro,} Imagist poets often use carefully chosen objects and imagery to evoke emotional reactions instead of depicting emotions explicitly  \citep{hamilton2004toward}. To quantify the degree of emotion explicitly described in each poem, we used the EMOT category ($311$ words) in the Harvard General Inquirer \citep{Inquirer+1966}. We computed an \emph{Emotion} score for each poem by counting and normalizing the number of words that appear in the EMOT category. We then used the z-scored valence and arousal norms of $13,915$ words collected by \citet{warriner2013norms} to account for more fine-grained differences between negative-valence and positive-valence words (e.g. ``torture'' v.s. ``love'') and low-arousal and high-arousal words (e.g. ``sad'' v.s. ``panicky''). A \emph{Valence} score was obtained for each poem by computing the average valence rating for all words in the poem, and an \emph{Arousal} score from average arousal ratings.
+
+\subsection{Sound devices}
+To examine the types of sound devices used in different poems, we computed sound device features using \citet{Kaplan}'s PoetryAnalyzer, which utilizes the Carnegie Mellon Pronouncing Dictionary to identify phonetic patterns indicative of poetic sound devices. We examined six different sound devices, which are listed as major elements of poetic craft in influential handbooks on creative writing \citep{Burroway, PoetsCompanion}: identity rhyme, perfect rhyme, slant rhyme, alliteration, consonance, and assonance. The PoetryAnalyzer identifies rhymes by examining phoneme sequences at the end of lines. If two words in a window of four line endings have identical phoneme sequences, then an instance of an identity rhyme is recorded. The final count of identity end rhymes is normalized by the total number of words in the poem to produce an \emph{IdentityEndRhyme} score. If two words in the window have different initial consonants but identical phoneme sequences from the stressed vowel phoneme onward, then the count for perfect end rhymes is incremented and normalized to produce a \emph{PerfectEndRhyme} score. If two words in the window of four line endings have the same stressed vowel but different phonemes following the stressed vowel, then the count for slant end rhymes is incremented and normalized to produce a \emph{SlantEndRhyme} score. If the initial phoneme of two consecutive words are identical consonants, an alliteration count is incremented and normalized to obtain an \emph{Alliteration} score. If there are at least two identical consonant phonemes in a window of nine syllables, the consonance count is incremented and normalized to obtain a \emph{Consonance} score. If there are at least two identical vowel phonemes in a window of nine syllables, the assonance count is incremented and normalized to obtain an \emph{Assonance} score. 
+
+\subsection{Diction}
+The first tenet of Imagism is ``to use the language of common speech, but always the exact word, not the nearly-exact, not the merely decorative word'' \citep{aldington1916some}. This suggests that diction, or word choice, may reveal interesting characteristics of Imagism. We can measure the ``commonness'' of language used in a poem by computing average word length (\emph{WordLength}) and average word frequency (\emph{WordFreq}), which are often used as a proxies for word difficulty \citep{testing, frequencyDifficulty}. We measured average word length by computing the average length of words in each poem in units of letters. We measured average word frequencies using a list of the top 500,000 most frequent words from the Corpus of Contemporary American English (COCA) \citep{COCA}. To measure ``exactness'' of language, we assumed that more precise words are appropriate for fewer contexts. By this logic, ``exactness'' can be approximated by the ratio of total word types to total number of words in each poem (\emph{TypeTokenRatio}), where poems with higher type-token ratios avoid repeating the same words and are assumed to employ more diverse and precise vocabulary \citep{automaticEssay, readability}. 
+
+Table 1 provides a summary of all $16$ features and their corresponding examples.
+\begin{table}
+\center
+\begin{tabular}{l l }
+%\multicolumn{2}{l}{Probability(poem type = professional $| X$), where}\\
+\textbf{Feature} & \textbf{Examples} \\\hline
+Object & \emph{boat; leaf} \\
+Abstract & \emph{day; love} \\
+Imageability & \emph{an $\rightarrow$ beach} \\
+Concreteness & \emph{although $\rightarrow$ comb}\\\hline
+Emotion &  \emph{confidence; anxious} \\
+Valence & \emph{torture $\rightarrow$ love}\\
+Arousal & \emph{sad $\rightarrow$ panicky}\\\hline
+Identity end rhyme & \emph{restore / store} \\
+Perfect end rhyme & \emph{floor / store} \\
+Slant end rhyme & \emph{bred / end}\\
+Alliteration & \emph{frozen field}\\
+Consonance & \emph{brown skin hung}\\
+Assonance & \emph{shallower and yellowed}\\\hline
+Word length &  --\\
+Word frequency &  --\\
+Type-token ratio & --\\\hline
+\end{tabular}
+ \caption{Summary of features}
+\end{table}
+
+%\section{Study 1: Imagist poets vs 19th century poets}
+
+\section{Study 1: Contemporary vs 19th century professional poets}
+Using these features, we then compared poems written by contemporary poets to those written by 19th century poets to examine the influence of Imagism on the modern literary aesthetic.
+
+\subsection{Materials and methods}
+
+$100$ poems were selected from 19th century American poets listed on a website called ``Famous Poets and Poems.'' To ensure that we selected poets who were prolific and whose works are well known, only poets with more than ten poems listed on the website were selected, which resulted in fifty poets. We randomly selected one to five poems from each poet, resulting in a final selection of $100$ poems ranging from $12$ to $1775$ words in length, with an average length of $210.25$ words (see Appendix for full list of poets and poems). %TODO
+Of the 19th century poets we selected, six were involved in the Imagist movement: Hilda Doolittle, T.S. Eliot, Amy Lowell, Marianne Moore, Ezra Pound, and William Carlos Williams. This resulted in 12 poems written by 19th century Imagist poets and 88 poems written written by 19th century non-imagist poets. 
+ 
+$100$ poems were selected from sixty-seven professional poets whose work was published in a collection of Contemporary American Poetry \citep{ContempAmPoetry}. These poets produced most of their work towards the middle and end of the 20th century and are considered some of the best contemporary poets in America. All of the poets are listed in the website of the Academy of American Poets, and many have won prestigious awards (e.g., Louise Gluck, Mary Oliver, Mark Strand). We randomly selected one to three poems from each poet, roughly proportional to the number of poems each poet had in the collection. The final selection ranged from $32$ to $378$ words in length with an average length of $174.15$ words (see Appendix for full list of poets and poems).
+
+\subsection{Results}
+
+\begin{figure}
+\label{fig1}
+\scalebox{0.45}{\includegraphics{../Analyses/figure1.pdf}}
+%\end{center}
+\caption{Average feature scores for contemporary professional poets and 19th century professional poets. Error bars are standard error.} 
+\end{figure}
+
+We implemented the $16$ features described in Section 2 for all $200$ poems. The features were standardized to have zero mean and unit variance across poems. We began with a simple analysis comparing the feature scores of poems written by 19th century professional poets (including Imagists) and contemporary professional poets. 
+
+With respect to the use of concrete imagery, we found that poems written by contemporary poets contained significantly more \emph{Object} words and significantly fewer \emph{Abstract} words.
+We also found that contemporary poems scored significantly higher on \emph{Concreteness} as well as \emph{Imageability}, suggesting that modern aesthetic standards are characterized by the presence of concrete imagery to a higher degree than 19th century poems.
+
+In our analysis of emotional language, we found that poems written in the 19th century contain significantly more \emph{Emotion} words than contemporary poems. This provides quantitative evidence that contemporary poets are less likely to make explicit references to emotions. In addition, 19th century poems scored significantly higher on both \emph{Valence} and \emph{Arousal}, suggesting that 19th century poets tend to use words that are more positive and excited, and that contemporary poets are generally more subdued in their use of emotional language. 
+
+The sound devices used by contemporary and 19th century poets also differ in interesting ways. 19th century poets used significantly more identity and perfect end rhymes, which follows naturally from adherence to stricter poetic forms and rhyme schemes. On the other hand, contemporary poets developed ``new rhythms'' and new sound patterns by employing significantly more subtle devices such as slant end rhymes and assonance.
+
+These comparisons show that contemporary aesthetics standards are more consistent with Imagism sensibilities in terms of imagery, emotive language, and sound patterns. However, it is unclear whether the Imagist movement was responsible for establishing this aesthetic, or whether the preference for more concrete imagery, more subdued emotional language, and subtler sound patterns is the natural result of artistic tastes evolving over time. \cite{martindale1990clockwork} proposed that art naturally evolves to become more complex, because the pressure to be novel requires artists to create work with higher complexity and entropy. %Needs work
+This complexity can manifest in higher concreteness (explain why concrete things are more complex), which may be partially responsible for the differences we report here. If time is the best predictor for concreteness, then we would expect that the degree of concreteness in a poem would be increasingly higher the later it is written, regardless of the Imagism movement. If, on the other hand, Imagism is responsible for promoting concreteness as a critical characteristic of good poetry, then we would expect that poems written prior to the Imagism movement would be uniformly low on concreteness, while poems written after the movement would be uniformly high on concreteness. In other words, we would expect to see a qualitative shift in concreteness before and after the Imagism movement, without much systematic variation otherwise.
+
+To test these two hypotheses, we obtained the birth years of each of the poets from Wikipedia and further classified the poets into more fine-grained time periods. Although the year in which each poem was written is a more accurate measure, this value is more difficult to obtain and can be adequately approximated by the poets' birth years for our purposes.
+
+We first tested whether the concreteness of a poem is correlated with the poet's birth year and found a significant correlation of $0.386$ ($p < 0.0001$). We then tested whether this correlation is an artifact of the difference between 19th century and contemporary professional poets, or if it is consistent across time. We found that while contemporary poems scored significantly higher on concreteness than 19th century poems, there was no significant correlation between the poets' birth years and concreteness within these time periods. Instead, Imagist poets writing in the 19th century used significantly more concrete imagery than their peers, which was in turn adopted by contemporary poets. In other words, our analysis suggests that concreteness is not simply a natural product of time, but rather the consequence of a highly concentrated and deliberate literary movement.
+
+%Contemporary poets also use different types of sound devices from. These results suggest that contemporary poetry employs more concrete imagery and less abstract language. which is consistent with the idea that the poetic standards championed by Imagists continue to influence contemporary poets.
+\begin{figure}
+\scalebox{0.7}{\includegraphics{../Analyses/figure3.pdf}}
+%\end{center}
+%\caption{Average marginal prior probability ratings for the three features given an animal category or a person category. Error bars are standard error over the $32$ items.} 
+\end{figure}
+
+%\begin{figure}
+%\scalebox{0.7}{\includegraphics{../Analyses/figure4.pdf}}
+%%\end{center}
+%%\caption{Average marginal prior probability ratings for the three features given an animal category or a person category. Error bars are standard error over the $32$ items.} 
+%\end{figure}
+
+\section{Study 2: Contemporary professional vs amateur poets}
+After empirically validating the influence of Imagism on contemporary professional poets, we now turn to examine the presence of Imagist ideals in contemporary amateur poets.
+
+\subsection{Materials and methods}
+
+$100$ poems were selected from amateur poets who submitted their work anonymously to a free and open-to-all website, aptly called ``Amateur Writing'' (www.amateur-writing.com). At the time of selection, the website had over $2500$ amateur poem submissions by registered users. The website contains a diverse set of poems submitted by amateur writers with a wide range of experience and skill levels. We randomly selected poems from the website and corrected for misspellings and obvious grammatical errors in the poems to control for the effect of basic language skills. The final selection of amateur poems ranged from $21$ to $353$ words in length with an average length of $137.52$ words. 
+
+%\begin{figure}
+%\scalebox{0.45}{\includegraphics{../Analyses/figure2.pdf}}
+%%\end{center}
+%%\caption{Average marginal prior probability ratings for the three features given an animal category or a person category. Error bars are standard error over the $32$ items.} 
+%\end{figure}
+
+\subsection{Results}
+We implemented the 16 features described in Section 2 for the 100 amateur poems. To compare across the three sets of poems (19th century professional, contemporary professional, and contemporary amateur), each feature was standardized to have zero mean and unit variance across all 300 poems in our dataset. We found that for many of the features we considered, modern amateur poets more closely resembled 19th century professional poets than contemporary professional poets. 
+
+This result has many different possible explanations. First, it is possible that the Imagist aesthetic is more sophisticated and difficult to master, in which case amateur poets are less likely to adhere to it regardless of the time period in which they are writing. A consequence of this explanation is that prior to the Imagism movement, professional and amateur poets wrote in a more similar style; as contemporary professional poets adopted the Imagism aesthetic, the gap between professional and amateur poets grew. A second explanation is that while the Imagist aesthetic is not necessarily more difficult or sophisticated, literary movements simply have a stronger influence on elite poets and do not tend to reach amateur poets. A third explanation is closely related to \citep{simmel1957fashion}'s theory about fashion and social class. Since contemporary amateur poets were likely exposed to 19th century poems in high school English classes, their impression of good poetry (``high" art) follows the style of older poets. As a result, amateur poets tend to emulate these styles when they later produce poetry of their own. In order to distinguish themselves from amateur poets, contemporary professional poets broke away from the standard style and created a new style, prompted by the Imagism movement. This explanation predicts that amateur poets in the next century will write more like professional poets in this century, and that professional poets in the next century will develop a new style altogether. While these three explanations cannot yet be distinguished by our current data, they produce different predictions that can be examined with more data in the future. 
+%\section{Measures Comparison}
+%Concreteness, imageability, and object words\\
+%Valence, arousal, and emotion words\\
+%``in literary usage, imagery  refers
+% to images produced in the mind by language'' \citep{preminger1986princeton}.\\
+%Auditory images:
+%``Silently, easily we sway through braying traffic''
+\begin{figure}
+\scalebox{0.3}{\includegraphics{../Analyses/amateur-concreteness.pdf}}
+%\end{center}
+%\caption{Average marginal prior probability ratings for the three features given an animal category or a person category. Error bars are standard error over the $32$ items.} 
+\scalebox{0.3}{\includegraphics{../Analyses/amateur-emot.pdf}}
+%\end{center}
+%\caption{Average marginal prior probability ratings for the three features given an animal category or a person category. Error bars are standard error over the $32$ items.} 
+\end{figure}
+\begin{figure}
+\scalebox{0.3}{\includegraphics{../Analyses/amateur-sound.pdf}}
+%\end{center}
+%\caption{Average marginal prior probability ratings for the three features given an animal category or a person category. Error bars are standard error over the $32$ items.} 
+\end{figure}
+\section{Discussion}
+\subsection{Summarize findings}
+As predicted, poems written by professional poets contain significantly more words that reference objects and significantly less words about abstract concepts and generalizations. This result suggests that professional poets follow the sacred rule of ``show, don't tell'' and let images instead of words convey emotions, concepts, and experiences that stick to readers' minds. Professional poets not only use more object words than amateur poets ($698$ counts versus $205$), but they also use a larger and more diverse set of object words ($250$ types versus $85$), as shown in Table 4. Professional poets reference natural objects very often, such as \emph{tree, grass,} and \emph{flower}. On the other hand, the most frequent concrete object word in amateur poems is the extremely vague word \emph{thing}. This suggests that even when amateur poets reference concrete objects, they do not use words that provide specific sensory details.
+
+In terms of affect, our results suggest that poems by professional poets are not more negatively emotional---at least not explicitly. On the contrary, amateur poets are significantly more likely to reference negative emotions than professional poets. Our results reveal an interesting distinction between words with positive and negative outlooks and connotations versus words that reference positive and negative emotions. While the two pairs of categories are strongly correlated, they capture different aspects of a text's emotional content. The positive and negative outlook categories contain many words that are not emotions but may evoke certain emotional attitudes, such as \emph{clean} and \emph{death}. The fact that professional poets are significantly less likely to use explicitly negative emotion words than amateur poets, but not significantly less likely to use negatively connotative words, suggests that professional poets may evoke more negative sentiment through connotation rather than explicit descriptions.
+
+The results on sound devices provide interesting insight into the current stylistic trends of contemporary professional poetry. While sound devices have a long history in poetry and are considered a feature of poetic beauty, contemporary professional poets now use these devices much less often than amateur poets. Sound devices that were traditionally important in poetry for mnemonic purposes, such as rhyme and alliteration, are more prevalent in amateur poems. Even subtle and sophisticated sound devices like slant rhyme, consonance, and assonance are not significant indicators of professional poetry. These results suggest that repetition of sound is becoming a less aesthetically significant poetic device among contemporary masters of poetry.
+
+Our analysis supports the idea that Imagism has strongly influenced the ways in which modern poets and literary critics think about literary writing. Literary critic I.A. Richards argued that image clusters and patterns of imagery are keys to deeper meaning in literary works, and that critics should pay close attention to these patterns in order to understand ``the language of art'' beneath the surface ordinary language \citep{critic}. Not only are concrete images able to render the world in spectacular detail, they also provide windows into particular experiences on which readers can project their own perceptions and interpretations.
+
+Consistent with our predictions and with the aesthetic ideals of Imagism, professional poets also make significantly fewer direct references to abstract and intangible concepts (Table 5). If the deeper meaning of a poem is conveyed through imagery, abstract words are no longer needed to reference concepts and experiences explicitly. Moreover, amateur poets use significantly more words concerned with generalizations, as shown in Table 6. While amateur poets embrace the human impulse to generalize, the skilled poet must learn to extract and report unique details that single out each experience from the rest. 
+
+Overall, our results suggest that professional poets are more likely to show, while amateur poets have a tendency to tell. This difference marks the most significant distinction between contemporary professional and amateur poetry in our analysis and may be an essential aspect of craft and poetic beauty.
+
+\subsection{Implications for the influence of Imagism}
+
+\subsection{Implications for high and low art}
+Aesthetic standards vary between high and low art. Aesthetic standards may trickle down.  Simmel.
+
+\subsection{Is concreteness better in the absolute sense, or does it just happen to be the current aesthetic?}
+
+``Fundamental beliefs change art, but do not, necessarily, either improve or injure it. Great poetry has been written at every stage of the world's history, but Homer did not write like Dante, nor Dante like Shakespeare, nor Shakespeare like Edgar Allan Poe." \citep{lowell1920tendencies}
+
+One of the most important and oft-repeated piece of advice for writers is the following: ``Show, don't tell.'' \cite{Burroway} interprets this as meaning: ``Use concrete, significant details that address the senses.'' Effective imagery allows readers to bring in their own associations to understand and truly experience a new emotion, and skilled poets and writers are able to pick out specific sensory details that evoke deeper abstractions and generalizations. 
+
+The appeal of concrete imagery may have roots in processes that facilitate learning and memory. Previous research has shown that concrete noun pairs are easier to memorize than abstract noun pairs, which suggests that imagery can enhance the learning of word pairings \citep{pairing}. Other studies have shown that mental imagery facilitates relational association between concepts \citep{imagery}. Furthermore, \cite{neuro} found neural correlates that suggest that concrete nouns are processed differently in the brain than abstract nouns. One of the reasons why we find poetic imagery striking may be due to the psychological power of imagery to evoke rich associations formed by culture and personal experience. 
+
+Another reason why imagery is an essential element of poetic craft is that it allows writers to avoid falling into cliche, which is the bane of the creative writer's existence. \cite{Burroway} writes, ``flat writing is\dots full of abstractions, generalizations, and judgments. When these are replaced with nouns that call up a sense image and with verbs that represent actions we can visualize, the writing comes alive.'' Many abstract and common concepts can be embodied or evoked by surprising imagery. In our analysis, we predict that skilled poets are more likely to describe concrete objects and less likely to reference abstract concepts. We measure the degree to which a poem contains concrete details rather than abstractions and generalizations using categories from the Harvard General Inquirer (see Table 1). 
+
+``Great poetry, Hulme argued, always endeavours to arrest you, and to make you continuously see a physical thing, to prevent you from gliding through an abstract process. It chooses fresh epithets and fresh metaphors, not so much because they are new, and we are tired of the old, but because the old cease to convey a physical thing and become abstract counters, A poet says a ship ''coursed the seas'' to get a physical image, instead of the counter word '' sailed.'' 
+
+Research in psychology has confirmed poets' intuitions about the powerful effects of rhyme on perception and learning. For example, an aphorism that contains a rhyme is more likely to be perceived as true than a non-rhyming aphorism with the same meaning \citep{aphorisms}. Exposure to rhymes also enhances phonological awareness in young children and can lead to better reading performances \citep{reading}.
+
+%\subsection{What is happening to sound in poetry?}
+
+
+\section{Limitations and future directions}
+
+While our approach reveals interesting patterns that shed light on elements of poetic sophistication, conclusions from the analysis need to be tested using controlled experiments. For example, does modifying a professional poem to include less concrete words make people perceive it as less beautiful? Investigating these questions using psychology experiments could help identify causal relationships between linguistic elements and sensations of poetic beauty.
+
+In summary, our framework provides a novel way to discover potential features of poetic beauty that can then be experimentally tested and confirmed. By applying both stylistic and content analyses to the quantitative assessment of contemporary poetry, we were able to examine poetic craft on a representative set of poems and reveal potential elements of skill and sophistication in modern poetry.
+
+%\begin{table}
+%\centering
+%
+%\begin{tabular}{| l  r || l  r |} \hline
+%\multicolumn{2}{| c ||}{\textbf{Professional }} & \multicolumn{2}{| c |}{\textbf{Amateur }}\\ \hline
+%\textbf{Word} & \textbf{Count} & \textbf{Word} & \textbf{Count}\\\hline	
+%tree	&29 &	thing&	40\\
+%room	&20&	wall&	12\\
+%thing	&18&	bed&	11\\
+%grass	&17&	clock&	7\\
+%wall	&14&	room&	7\\
+%flower	&13&	tree&	6\\
+%glass	 &13&	leave&	6\\
+%floor	&13&	gift&5\\
+%car	&12&	mirror&	4\\
+%dirt	&11&	flower	&4 \\
+%$[\dots]$ & 538 & $[\dots]$ & 103 \\\hline
+%Proportion & $4.1\%$ & Proportion & $1.5\%$ \\
+%Type count & 250 & Type count & 85\\ \hline
+%\end{tabular}
+%\caption{Concrete words}
+%\end{table}
+%
+%\begin{table}
+%\centering
+%\begin{tabular}{| l  r || l  r |} \hline
+%\multicolumn{2}{| c ||}{\textbf{Professional }} & \multicolumn{2}{| c |}{\textbf{Amateur }} \\ \hline
+%\textbf{Word} & \textbf{Count} & \textbf{Word} & \textbf{Count}\\ \hline
+%day	&40&	day&	54\\
+%night	&31&	time&	33\\
+%year	&25&	beauty&	25\\
+%time	&20&	soul&	16\\
+%death	&11&	night&	15\\
+%new   &9	&new	&14\\
+%morning &	8&	moment&	13\\
+%childhood&	7&	christmas&	12\\
+%hour	&7	&think&	11\\
+%afternoon	&7	&future&	9 \\
+%$[\dots]$ & 139 & $[\dots]$ & 143 \\\hline
+%Proportion & $1.8\%$ & Proportion & $2.6\%$ \\
+%Type count & 82 & Type count & 75 \\ \hline
+%\end{tabular}
+%\caption{Abstract words}
+%\end{table}
+%\begin{table}
+%\centering
+%\begin{tabular}{| l  r || l  r |} \hline
+%\multicolumn{2}{| c ||}{\textbf{Professional }} & \multicolumn{2}{| c |}{\textbf{Amateur }}\\ \hline
+%\textbf{Word} & \textbf{Count} & \textbf{Word} & \textbf{Count}\\\hline	
+%all	&63&	all	&82\\
+%nothing	&26&	never	&46\\
+%never	&19&	always	&43\\
+%always	&14&	nothing	&21\\
+%every	&11&	every	&15\\
+%any	&10&	forever	&14\\
+%anything	&5&	anything	&7\\
+%nobody	&5&	any	&6\\
+%everything	&5&	everything	&5\\
+%forever	&3&	everyone	&4 \\\hline
+%Proportion & $ < 1\%$ & Proportion &$1.8\%$ \\ \hline
+%\end{tabular}
+%\caption{Generalization words}
+%\end{table}
+
+
+\section*{Acknowledgments}
+We are deeply grateful for David Kaplan's generosity in sharing the code for the \emph{PoetryAnalyzer} program, on which a substantial part of our analysis is based. 
+
+\bibliographystyle{apa-good}
+\bibliography{mybib}
+
+\end{document}

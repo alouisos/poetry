@@ -1,0 +1,1229 @@
+
+%%% IDENTIFICATION
+
+%% Latex2e version of the CSLI publications macros
+%% this is to be used with the 10pt standard Book Class
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{liltcsli-sub}[2007/08/01 style macros Copyright CSLI Publications]
+\renewcommand\thesection{\arabic{chapter}}
+
+
+%%% INITIAL CODE
+
+\newcommand {\LiLT} {\textbf{L{\kern.01em}iLT}}
+
+
+\let \LaTeXsbox = \sbox   % because phonetic.sty redefines \sbox.
+
+% set paper size.  Needs to be set before crop package is loaded
+\setlength {\paperwidth}  {6in}   \setlength {\textwidth}  {4.25in}
+\setlength {\paperheight} {9in}   \setlength {\textheight} {502\p@}
+
+% reusable temporary variables
+\providecommand {\temp@contents} {}  % for table of contents
+\providecommand {\temp@heads}    {}  % for for running heads
+\providecommand {\temp@title}    {}  % for part/chapter/section/figure titles
+\providecommand {\temp@typeout}  {}  % for \typeout to the log
+
+
+%%% DECLARATION OF OPTIONS
+
+\newif \ifISSUE \ISSUEtrue        % ISSUE is default
+\DeclareOption {ISSUE}  {\ISSUEtrue}
+\DeclareOption {VOLUME} {\ISSUEfalse}
+
+\newif \ifDRAFT \DRAFTfalse       % no DRAFT option
+
+\DeclareOption {7x10}   {\csli@changePage   {1in}   {1in} {1in}{1in} {1.0833}}
+\DeclareOption {8.5x11} {\csli@changePage {2.5in}{2.25in} {2in}{2in} {1.1667}}
+
+
+%%% EXECUTION OF OPTIONS
+
+\newcommand {\csli@changePage}[5]
+            {\addtolength {\paperwidth}      {#1} % #1 = change in paper width
+             \addtolength {\textwidth}       {#2} % #2 = change in text width
+             \addtolength {\paperheight}     {#3} % #3 = change in paper height
+             \addtolength {\textheight}      {#4} % #4 = change in text height
+             \renewcommand{\baselinestretch} {#5} % #5 = linespacing multiplier
+            }
+
+\ProcessOptions
+
+
+%%% PACKAGE LOADING
+
+\RequirePackage{ifthen}              % for \ifthenelse in copyright code
+
+% The publications macros are set up for printing on 6"x9" paper
+% but since 8.5x11 is more standard we use the crop package to center
+% the pages on 8.5x11.  For crop marks do \crop[cam] .
+
+% Load crop marking package for handling page marking, only if \crop is called.
+\newif \ifCROP \CROPfalse
+\newcommand {\crop}      % intervene when \crop[] command is meant for crop.sty
+{\CROPtrue
+ \let \crop = \relax                  % undefine \crop
+ \RequirePackage[letter,center]{crop} % redefines \crop, \hoffset, \voffset
+ \let \set@color = \relax             % why? prevents an error
+ \crop                                % continue with redefined \crop command
+}
+
+
+%%% MAIN CODE
+
+
+%% DIMENSIONS
+
+
+% set various page parameters
+\setlength   {\headheight}  {10\p@}
+\setlength   {\headsep}     {12\p@}
+\setlength   {\footskip}    {20\p@}
+\setlength   {\topmargin}        {.75in}  % start with height to base of header
+\addtolength {\topmargin} {-\headheight}  % subtract height of header
+\addtolength {\topmargin}         {-1in}  % remove LaTeX's automatic 1 inch
+\setlength   {\oddsidemargin} {.5\paperwidth}
+\addtolength {\oddsidemargin} {-.5\textwidth}
+\addtolength {\oddsidemargin} {-1in}      % remove LaTeX's automatic 1 inch
+\setlength   {\evensidemargin} {\oddsidemargin}
+%\ifISSUE                     % center on 8.5x11 paper if using [ISSUE] option
+%     \addtolength {\hoffset} {4.25in}
+%     \addtolength {\hoffset} {-.5\paperwidth}
+%     \addtolength {\voffset} {5.5in}
+%     \addtolength {\voffset} {-.5\paperheight}
+%\fi
+
+% the following I'm unsure of.  Should be tested
+\setlength\marginparsep {10\p@}
+\setlength\marginparpush{5\p@}
+\setlength\marginparwidth {107\p@}
+
+% set miscellaneous parameters
+\setlength\textfloatsep{12\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\dbltextfloatsep{12\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\partopsep{\z@}
+\setlength\parskip {\z@ plus .25\p@}  % Extra vertical space between paragraphs
+\setlength {\parindent}   {12pt}
+\newlength {\serifindent} \setlength {\serifindent} {.05em}  % for \smaller
+
+
+%% SWITCHES
+
+% Use \csli@newswitch to create a new conditional that is meant to affect the
+% entire book (in future LaTeX passes) even though the conditional cannot be
+% determined until the middle of the book (in the current LaTeX pass).
+%
+% NOTES: It takes three LaTeX passes to get the full effect of any such switch.
+%        A switch, once turned on, remains on until the  .toc  file is deleted.
+%
+% E.g.:  \csli@newswitch {\csliisgood} {\ifcsli@good} {\relax}
+%        makes a new command called \csliisgood
+%        and a new conditional \ifcsli@good
+%        where \csliisgood: sets \ifcsli@good = true for future LaTeX passes
+%                           and executes \relax .
+
+\newcommand {\csli@newswitch}[3] % #1 = \command, #2 = \ifXXX, #3 = custom code
+            {\newif #2
+             \newcommand {#1}                 % #1 = \command to turn switch on
+                         {#2    \relax        % #2 = \ifXXX
+                          \else \addtocontents{toc}{\protect #1}%
+                                #3% % #3 = custom code when switch is turned on
+                          \fi
+                          \global\let #2 = \iftrue
+                         }%
+            }
+
+
+%% CONTENTS vs. RUNNING HEADS vs. TEXT AREA
+
+% \forContents{XXX} only shows XXX in Contents
+% \forHeads{XXX}    only shows XXX in running heads
+% \forText{XXX}     only shows XXX in text area
+
+\newcommand {\forContents} [1] {\protect\csli@forContents {#1}}
+\newcommand {\notContents} [1] {\protect\csli@forHeads    {#1}%
+                                \protect\csli@forText     {#1}}
+
+\newcommand {\forHeads}    [1] {\protect\csli@forHeads    {#1}}
+\newcommand {\notHeads}    [1] {\protect\csli@forContents {#1}%
+                                \protect\csli@forText     {#1}}
+
+\newcommand {\forText}     [1] {\protect\csli@forText     {#1}}
+\newcommand {\notText}     [1] {\protect\csli@forContents {#1}%
+                                \protect\csli@forHeads    {#1}}
+
+\newcommand {\csli@show}   [1] {#1}
+\newcommand {\csli@noshow} [1] {}
+\let \csli@forContents = \csli@noshow
+\let \csli@forHeads =    \csli@noshow
+\let \csli@forText =     \csli@show
+
+
+%% FONT SIZES
+
+
+% the pubs macros use a font at 11pt size (between \normalsize and \large)
+\newcommand\tlarge{\@setfontsize\large\@xipt{13.5}}
+
+
+% Redefine some of the size changing commands so skips are correct.
+% Also provide relative size commands \tinier, ..., \Huger for all sizes.
+
+\providecommand {\csli@size} {0}  % not counter because counters are global
+              %  \csli@size = .., -4=\tiny, .., 0=\normalsize, .., 5=\Huge, ..
+
+\newcounter  {csli@sizenew}
+\newcommand {\csli@renewsize}[1] {\renewcommand{\csli@size}{#1}\ignorespaces }
+
+\newcommand {\csli@relativeSizeName}[2]
+            {\setcounter   {csli@sizenew} {\csli@size}%
+             \addtocounter {csli@sizenew} {#1}%
+             \@tempcnta = \value{csli@sizenew}%
+             \ifnum   \@tempcnta < -4   \@tempcnta = -4 % clip underflow
+                      \typeout{Warning: \string#2 is less than \string\tiny.}%
+                      \fi
+             \ifnum   \@tempcnta >  5   \@tempcnta =  5 % clip overflow
+                      \typeout{Warning: \string#2 is more than \string\Huge.}%
+                      \fi
+             \advance \@tempcnta by 4\relax    % offset so 0=\tiny for \ifcase
+             \ifcase  \@tempcnta \tiny         \or
+                                 \scriptsize   \or
+                                 \footnotesize \or
+                                 \small        \or
+                                 \normalsize   \or
+                                 \large        \or
+                                 \Large        \or
+                                 \LARGE        \or
+                                 \huge         \else
+                                 \Huge         \fi
+             \expandafter\csli@renewsize {\arabic{csli@sizenew}}
+            }% end of \csli@relativeSizeName
+
+\newcommand {\tinier}  {\csli@relativeSizeName{-2}{\tinier}}
+\newcommand {\smaller} {\csli@relativeSizeName{-1}{\smaller}}
+\newcommand {\larger}  {\csli@relativeSizeName {1}{\larger}}
+\newcommand {\Larger}  {\csli@relativeSizeName {2}{\Larger}}
+\newcommand {\LARGER}  {\csli@relativeSizeName {3}{\LARGER}}
+\newcommand {\huger}   {\csli@relativeSizeName {4}{\huger}}
+\newcommand {\Huger}   {\csli@relativeSizeName {5}{\Huger}}
+
+\renewcommand\normalsize{%
+   \csli@renewsize{0}%
+   \@setfontsize\normalsize\@xpt\@xiipt
+   \abovedisplayskip 4.5\p@ \@plus1\p@ \@minus1\p@
+   \abovedisplayshortskip \z@ \@plus1\p@
+   \belowdisplayshortskip 2.5\p@ \@plus.35\p@ \@minus.35\p@
+   \belowdisplayskip \abovedisplayskip
+   \let\@listi\@listI}
+
+\renewcommand\small{%
+   \csli@renewsize{-1}%
+   \@setfontsize\small\@ixpt{11}%
+   \abovedisplayskip 4\p@ \@plus1\p@ \@minus1\p@
+   \abovedisplayshortskip \z@ \@plus.75\p@
+   \belowdisplayshortskip 2\p@ \@plus.3\p@ \@minus.3\p@
+   \def\@listi{\leftmargin\leftmargini
+               \topsep 2\p@ \@plus.3\p@ \@minus.3\p@
+               \parsep \z@ \@plus.3\p@ \@minus\z@
+               \itemsep .75\p@ \@plus\z@ \@minus.25\p@}%
+   \belowdisplayskip \abovedisplayskip
+}
+
+\renewcommand\footnotesize{%
+   \csli@renewsize{-2}%
+   \@setfontsize\footnotesize\@viiipt{9.5}%
+   \abovedisplayskip 3\p@ \@plus.5\p@ \@minus.5\p@
+   \abovedisplayshortskip \z@ \@plus.5\p@
+   \belowdisplayshortskip 1.5\p@ \@plus.25\p@ \@minus.25\p@
+   \def\@listi{\leftmargin\leftmargini
+               \topsep 1.5\p@ \@plus.25\p@ \@minus.25\p@
+               \parsep \z@ \@plus.25\p@ \@minus\z@
+               \itemsep .5\p@ \@plus\z@ \@minus.25\p@}%
+   \belowdisplayskip \abovedisplayskip
+}
+
+                                             \let\LaTeXscriptsize=\scriptsize
+\renewcommand{\scriptsize}{\csli@renewsize{-3}   \LaTeXscriptsize}
+                                             \let\LaTeXtiny=\tiny
+\renewcommand{\tiny}      {\csli@renewsize{-4}   \LaTeXtiny}
+                                             \let\LaTeXlarge=\large
+\renewcommand{\large}     {\csli@renewsize {1}   \LaTeXlarge}
+                                             \let\LaTeXLarge=\Large
+\renewcommand{\Large}     {\csli@renewsize {2}   \LaTeXLarge}
+                                             \let\LaTeXLARGE=\LARGE
+\renewcommand{\LARGE}     {\csli@renewsize {3}   \LaTeXLARGE}
+                                             \let\LaTeXhuge=\huge
+\renewcommand{\huge}      {\csli@renewsize {4}   \LaTeXhuge}
+                                             \let\LaTeXHuge=\Huge
+\renewcommand{\Huge}      {\csli@renewsize {5}   \LaTeXHuge}
+
+\def\@listi{\leftmargin\leftmargini
+            \parsep 0\p@ \@plus.5\p@ \@minus\z@
+            \topsep 4\p@ \@plus.5\p@ \@minus.5\p@
+            \itemsep1.25\p@ \@plus2\p@ \@minus\p@}
+\let\@listI\@listi
+\@listi
+\def\@listii {\leftmargin\leftmarginii
+              \labelwidth\leftmarginii
+              \advance\labelwidth-\labelsep
+              \topsep    1.5\p@ \@plus.15\p@ \@minus.15\p@
+              \parsep    \z@ \@plus.15\p@  \@minus\z@
+              \itemsep   \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \topsep    1\p@ \@plus.1\p@\@minus.1\p@
+              \parsep    \z@
+              \partopsep \z@ \@plus\z@ \@minus\z@
+              \itemsep   \topsep}
+
+
+%% ITEMIZED LIST
+%  Revision of \begin{itemize} (bullets at left margin, indent by \parindent)
+
+\renewenvironment {itemize}
+                  {\ifnum \@itemdepth > \thr@@ \@toodeep \fi
+                   \advance \@itemdepth \@ne
+                   \edef \@itemitem {labelitem\romannumeral \the \@itemdepth }
+                          \expandafter \list \csname \@itemitem \endcsname
+                          {\renewcommand   {\makelabel}[1]  {##1\hfil}
+                           \setlength      {\leftmargin}    {\parindent}
+                           \ifdim           \leftmargin  <   .8em
+                              \setlength   {\leftmargin}    {.8em}  \fi
+                           \setlength      {\labelwidth}    {\leftmargin}
+                           \setlength      {\labelsep}      {0pt}
+                           \setlength      {\listparindent} {.9\leftmargin}}}
+                  {\global \advance \@listdepth \m@ne \endtrivlist}
+
+% make all default labels be bullets
+\renewcommand {\labelitemi}   {\raisebox{.4ex}{\Huger .}}
+\renewcommand {\labelitemii}  {\labelitemi}
+\renewcommand {\labelitemiii} {\labelitemi}
+\renewcommand {\labelitemiv}  {\labelitemi}
+
+
+%% BLOCK QUOTES
+%  Revisions of \begin{quotation} and \begin{quote} (9pt text, wider margins)
+
+\renewenvironment {quotation}
+                  {\begin{list}{}{\setlength  {\leftmargin}    {\parindent}
+                                  \addtolength{\leftmargin}    {\serifindent}
+                                  \setlength  {\rightmargin}   {\leftmargin}
+                                  \setlength  {\itemindent}    {.8\leftmargin}
+                                  \setlength  {\listparindent} {\itemindent}}
+                               \smaller\item\relax}
+                  {\end{list}}
+
+\renewenvironment {quote}
+                  {\begin{list}{}{\setlength  {\leftmargin}    {\parindent}
+                                  \addtolength{\leftmargin}    {\serifindent}
+                                  \setlength  {\rightmargin}   {\leftmargin}
+                                  \setlength  {\parsep}        {\topsep}}
+                               \smaller\item\relax}
+                  {\end{list}}
+
+
+
+% reset things so tables, figures, equations, and footnotes number
+% continously throughout the document and not reset at the start of
+% each chapter
+\def\cl@chapter{\@elt{section}}
+
+% How the numbers look in Tables and Figures
+\renewcommand \thetable{\@arabic\c@table}
+\renewcommand \thefigure{\@arabic\c@figure}
+
+
+
+
+%% TITLE PAGE
+
+
+
+\newcommand {\shorttitle}[1] {\newcommand {\csli@shorttitle}   {#1}}
+
+\newcommand {\volumeissue}[2] {\newcommand {\csli@volume}   {#1}
+                               \newcommand {\csli@issue}    {#2}}
+\newcommand {\monthyear}[2]   {\newcommand {\csli@month}    {#1}
+                               \newcommand {\csli@year}     {#2}}
+\newcommand {\subtitle}[1]    {\newcommand {\csli@subtitle} {#1}}
+\newcommand {\affiliation}[1] {, \textit{#1}}
+
+
+\newcommand {\makeltitle}
+{\newcommand {\csli@copyright} {\csli@year}
+  \thispagestyle{empty}
+  \begin{raggedright}
+    \setlength {\parindent} {0pt}
+    \Large
+%    \centerline{\textsl{L\kern.06em}inguistic \textsl{I\kern.07em}ssues in
+%                \textsl{L\kern.08em}anguage   \textsl{T\kern.01em}echnology
+%                -- \LiLT \hss}
+     \centerline{\textbf{L\kern.06em}inguistic \textbf{I\kern.07em}ssues in
+                \textbf{L\kern.08em}anguage   \textbf{T\kern.01em}echnology
+                -- \LiLT \hss}
+
+    \par \vspace{.05in}
+    \large
+   Submitted,    
+    \csli@month\ \csli@year
+    \par \vspace{.75in}
+    \begin{bfseries}
+        \begin{center}
+            \LARGE
+            \@title
+            \par \vspace{.2in}
+            \ifdefined \csli@subtitle
+               \addtolength {\leftskip}{.2in}
+               \addtolength{\rightskip}{.2in}
+               \Large
+               \csli@subtitle
+               \par \vspace{.2in}
+            \fi
+        \end{center}
+        \vspace{.2in}
+        \large
+        \renewcommand {\affiliation}[1] {\\[.5ex]}  % no affiliation here
+        \par \@author        % \textsc seems to fail here within \bfseries
+    \end{bfseries}
+    \par \vfill
+    
+    \normalsize
+    \begin{flushright}
+%    \hfill Submitted, \csli@month\csli@year \\
+%    \hfill Revised, \csli@month\csli@year\\
+    \hfill Published by CSLI Publications
+    \end{flushright}
+  \end{raggedright}
+  \newsavebox {\csli@copyrightBox}
+   \LaTeXsbox {\csli@copyrightBox}
+              {\parbox[b]{\psp@width}
+                   {\renewcommand{\baselinestretch}{1.0}\normalfont\scriptsize
+                    \vspace*{.1in}
+                    \noindent
+                    \LiLT\ Volume \csli@volume, Issue \csli@issue,
+                                  \csli@month\ \csli@year. \\
+                    \textit{\@title}. \\
+                    Copyright \copyright~\csli@copyright, CSLI Publications.}}
+  \newlength     {\csli@copyrightHeight}
+    \settoheight {\csli@copyrightHeight} {\usebox{\csli@copyrightBox}}
+    \addtolength {\csli@copyrightHeight} {.3in}
+  \setcounter{footnote}{0}
+  \newpage
+} % end of \makeltitle
+
+
+%% FRONT/MAIN/BACK MATTER  (because LaTeX only comes with \if@mainmatter test)
+
+\newif \if@frontmatter   \@frontmatterfalse
+\newif \if@backmatter    \@backmatterfalse
+\newif \if@appendix      \@appendixfalse
+
+\let \LaTeXfrontmatter = \frontmatter
+\let \LaTeXmainmatter  = \mainmatter
+\let \LaTeXbackmatter  = \backmatter
+\let \LaTeXappendix    = \appendix
+
+\renewcommand {\frontmatter} {\global\@frontmattertrue
+                              \global\@mainmatterfalse
+                              \global\@backmatterfalse
+                              \LaTeXfrontmatter}
+
+\renewcommand {\mainmatter}  {\global\@frontmatterfalse
+                              \global\@mainmattertrue
+                              \global\@backmatterfalse
+                              \LaTeXmainmatter}
+
+\renewcommand {\backmatter}  {\ifcsli@collection  \relax
+                                           \else  \csli@revisebibforchapter
+                              \fi
+                              \global\@frontmatterfalse
+                              \global\@mainmatterfalse
+                              \global\@backmattertrue
+                              \LaTeXbackmatter}
+
+\renewcommand {\appendix}    {\@appendixtrue  % NOT \global, for \end{appendix}
+                              \LaTeXappendix}
+
+\csli@newswitch {\bookhasmultipleappendixes} {\ifcsli@multipleappendixes} {}
+
+
+%% PART PAGE
+
+\renewcommand {\part}[1]              % Variation of LaTeX's \part:
+                                      % - no \part* command
+                                      % - no optional [short title]
+                                      % - no page numbers
+                                      % - appearance resembles chapter titles
+  {%
+   \cleardoublepage \thispagestyle{empty}
+   \if@mainmatter
+          \refstepcounter {part}
+          \renewcommand {\temp@contents} {\underline{\strut\Roman{part}~~#1}}
+   \else % frontmatter and backmatter, no part number
+          \renewcommand {\temp@contents} {\underline{\strut #1}}
+   \fi
+   \addcontentsline {toc} {part} {\temp@contents}
+   \begingroup
+          \renewcommand {\thechapter} {Part \Roman{part}}
+          \@makechapterhead{#1}
+   \endgroup
+   \vfil \newpage
+  }
+
+
+%% SECTION HEADINGS
+
+\renewcommand {\@chapter}[2][]          % [#1] = title for Contents and heads,
+                                        % {#2} = full title
+  {%
+   \if@frontmatter  \relax
+             \else  \refstepcounter{chapter}%
+   \fi
+   \if@mainmatter
+          \renewcommand {\temp@contents} {\protect\numberline{\thechapter} #1}
+          \renewcommand {\temp@heads}    {#1}
+          \renewcommand {\temp@typeout}  {\@chapapp\space\thechapter.}
+   \else % frontmatter and backmatter
+          \renewcommand {\temp@contents} {#1}
+          \renewcommand {\temp@heads}    {#1}
+          \renewcommand {\temp@typeout}  {#1.}
+   \fi
+   \if@appendix
+      \ifnum \c@chapter > 1  \bookhasmultipleappendixes  \fi
+      \ifcsli@multipleappendixes
+          \renewcommand {\temp@contents} {\@chapapp~\thechapter: \,#1}
+          \renewcommand {\temp@heads}    {\@chapapp~\thechapter: \,#1}
+          \renewcommand {\temp@typeout}  {\@chapapp\space\thechapter.}
+      \else  % single appendix, called "Appendix" with no letter
+          \renewcommand {\temp@contents} {\@chapapp: \,#1}
+          \renewcommand {\temp@heads}    {\@chapapp: \,#1}
+          \renewcommand {\temp@typeout}  {\@chapapp.}%
+      \fi
+      \ifappendixContentsLetterOnly
+          \renewcommand {\temp@contents} {\protect\numberline{\thechapter} #1}
+      \fi
+   \fi
+   \typeout {\temp@typeout}
+   \addcontentsline {toc} {chapter} {\temp@contents}%
+   \chaptermark {\temp@heads}%
+   % \addtocontents {lof} {\protect\addvspace{10\p@}}%
+   % \addtocontents {lot} {\protect\addvspace{10\p@}}%
+   \if@twocolumn  \@topnewpage [\@makechapterhead{#2}]%
+           \else  \@makechapterhead{#2}%
+                  \@afterheading
+   \fi
+  }
+
+\renewcommand {\@makechapterhead}[1]
+  {%
+   \if@mainmatter  \renewcommand {\temp@title} {\strut \thechapter}
+            \else  \renewcommand {\temp@title} {\strut}
+   \fi
+   \if@appendix
+      \ifcsli@multipleappendixes
+                   \renewcommand {\temp@title} {\strut Appendix \thechapter}
+            \else  \renewcommand {\temp@title} {\strut Appendix}
+      \fi
+   \fi
+   \vspace*{50\p@}%
+   \begingroup
+      \parindent \z@ \raggedright \normalfont
+      \Large\bfseries \temp@title
+      \vspace{-8pt}
+      \par\nobreak
+      \leavevmode \hrulefill \linebreak \vspace{-16pt} \par
+      \interlinepenalty\@M
+      \LARGE \bfseries #1\par\nobreak
+      \vskip 33\p@
+   \endgroup
+  }
+
+\def\@makeschapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Large \bfseries  \strut \vspace{-8pt}
+    \par\nobreak
+    \leavevmode \hrulefill \linebreak \vspace{-16pt} \par
+    \interlinepenalty\@M
+    \LARGE\bfseries #1 \par \nobreak
+    \vskip 33\p@
+  }}
+
+% hack, two column version of \@makeschapterhead so that index looks
+% right
+\def\@makestcchapterhead#1{%
+  \vspace*{65\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Large \bfseries  \strut \vspace{-8pt}
+    \par\nobreak
+    \leavevmode \hrulefill \linebreak \vspace{-16pt} \par
+    \interlinepenalty\@M
+    \LARGE\bfseries #1 \par \nobreak
+    \vskip 33\p@
+  }}
+
+
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-2ex \@plus -.5ex \@minus -.2ex}%
+                                   {.8ex \@plus.08ex}%
+                                   {\normalfont\tlarge\bfseries\raggedright}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                 {-1.5ex\@plus -.25ex \@minus -.1ex}%
+                                 {.6ex \@plus .06ex}%
+                                 {\normalfont\normalsize\bfseries\raggedright}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                 {-1ex\@plus -.15ex \@minus -.06ex}%
+                                 {.4ex \@plus .04ex}%
+                                 {\normalfont\normalsize\bfseries\raggedright}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {.5ex \@plus.05ex \@minus.025ex}%
+                                    {-.66em}%
+                                    {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                                       {.25ex \@plus.01ex \@minus .005ex}%
+                                       {-.66em}%
+                                      {\normalfont\normalsize\itshape}}
+
+
+
+%%%%%%%%% CHAPTER-AUTHOR FORMAT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \lchapter[TOCHEAD]{HEADING}{AUTHOR}
+%
+\def\lchapter{%
+   \cleardoublepage
+   \bookiscollection            % Note that this is a collected volume.
+   \tochasboldchapters          % Boldface chapter titles in table of contents.
+   \thispagestyle{copyright}    % = \thispagestyle{plain} + \csli@copyrightBox
+   \global\@topnum\z@           % Prevents figures from going at top of page.
+   \@afterindentfalse           % Suppresses indent in first paragraph.  Change
+   \@lchapter}                  % to \@afterindenttrue to have indent.
+
+\def\@lchapter{\ifnum \c@secnumdepth >\m@ne
+        \if@mainmatter
+          \refstepcounter{chapter}
+          \typeout{\@chapapp\space\thechapter.}
+          \addcontentsline{toc}{chapter}%
+          {\protect\numberline{\thechapter}\@title}
+        \addcontentsline{toc}{author}{\protect\numberline{\ }\@author}%
+        \else
+          \addcontentsline{toc}{chapter}{\@title}%
+        \addcontentsline{toc}{author}{\@author}%
+        \fi
+      \else
+        \addcontentsline{toc}{chapter}{\@title}%
+        \addcontentsline{toc}{author}{\@author}%
+      \fi
+   \markboth{\LiLT\ volume \csli@volume, issue \csli@issue
+             \hfill \csli@month\ \csli@year}
+           {\ifdefined \csli@shorttitle
+        \csli@shorttitle
+    \else
+        \@title
+    \fi}%
+   \addtocontents{lof}{\protect\addvspace{8\p@}}% Adds between-chapter space
+   \addtocontents{lot}{\protect\addvspace{8\p@}}% to lists of figs & tables.
+   \if@twocolumn                                 % Tests for two-column mode.
+         \@topnewpage[\@makelchapterhead]
+   \else
+         \@makelchapterhead
+         \@afterheading                  % Routine called after chapter and
+     \fi}                                  % section heading.
+
+\def\@makelchapterhead{          % Heading for \lchapter command
+  \def\chapapp{Chapter}\let\thechap=\thechapter % for even footer material
+  \def\sectapp{Section}\let\thesect=\thesection % for odd footer material
+  \vspace*{50\p@}                % Space at top of text page.
+  {\parindent \z@ \raggedright \normalfont
+   \ifnum \c@secnumdepth >\m@ne
+      \normalsize
+      \if@mainmatter
+          \LiLT\ volume \csli@volume, issue \csli@issue
+          \hfill \csli@month\ \csli@year
+      \else
+          \strut
+      \fi
+      \vspace{-8pt}
+      \par \nobreak
+      \leavevmode \hrulefill \linebreak \null \vspace{-6pt} \par
+   \fi
+   \interlinepenalty\@M
+   \begin{raggedright}
+        \bfseries
+        \setlength {\parindent} {0pt}
+        \Large
+        \@title
+        \par \vspace{.15in}
+        \ifdefined \csli@subtitle
+             \begingroup
+             \addtolength {\leftskip}{.2in}
+             \addtolength{\rightskip}{.2in}
+             \large
+             \csli@subtitle
+             \par \vspace{.15in}
+             \endgroup
+        \fi
+        \vspace{.05in}
+        \mdseries
+        \normalsize \textsc{\@author}
+   \end{raggedright}
+   \par \nobreak
+   \vspace{.5in}
+ }}
+
+
+\csli@newswitch {\bookiscollection} {\ifcsli@collection}
+                {\typeout{Seems to be a collected volume (says liltcsli.sty).}%
+                 \csli@revisebibforsection
+                 \resetnumbersatchapters
+                }
+
+
+\newcommand {\resetnumbersatchapters}
+            {\@addtoreset{figure}  {chapter}%
+             \@addtoreset{footnote}{chapter}%
+             \@addtoreset{table}   {chapter}%
+            }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% PAGEHEADINGS
+
+
+% code for dates in corners of DRAFT mode (no date if \crop[] has been called)
+\newlength {\dateup}    \setlength  {\dateup}   {\topmargin}      % top crop
+                        \addtolength{\dateup}   {1in}
+                        \addtolength{\dateup}   {\headheight}
+\newlength {\dateleft}  \setlength  {\dateleft} {\evensidemargin} % left crop
+                        \addtolength{\dateleft} {1in}
+\newlength {\dateright} \setlength  {\dateright}{\paperwidth}     % right crop
+                        \addtolength{\dateright}{-\textwidth}
+                        \addtolength{\dateright}{-\oddsidemargin}
+                        \addtolength{\dateright}{-1in}
+\newcommand{\NEdate}{\ifCROP\relax\else \ifDRAFT \raisebox{\dateup}[0pt]
+                     {\rlap{\hspace{\dateright}\rm\footnotesize\today}}\fi\fi }
+\newcommand{\NWdate}{\ifCROP\relax\else \ifDRAFT \raisebox{\dateup}[0pt]
+                     {\llap{\rm\footnotesize\today\hspace{\dateleft}}}\fi\fi }
+
+
+\renewcommand {\ps@empty} {\renewcommand {\@evenfoot} {}
+                           \renewcommand {\@oddfoot}  {\@evenfoot}
+                           \renewcommand {\@evenhead} {\NWdate \hfill}
+                           \renewcommand {\@oddhead}  {\hfill \NEdate}
+                          }
+
+
+\providecommand {\markleft}[1] {\renewcommand{\leftmark}{#1}}
+
+
+\if@twoside % If two-sided printing.
+\def\ps@headings{\let\@mkboth\markboth
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@empty
+  \def\@evenhead{\let\csli@forText=\csli@noshow \let\csli@forHeads=\csli@show
+                 \NWdate \small \thepage\ /\ \textsc{\leftmark}\hfil}
+  \def\@oddhead {\let\csli@forText=\csli@noshow \let\csli@forHeads=\csli@show
+                 \hbox{}{\small \hfil\textsc{\rightmark}\ /\ \thepage}\NEdate}
+\def\chaptermark##1{\markboth{\@title}{##1}}
+% \def\schaptermark##1{\markboth{\@title}{##1}}
+% \def\achaptermark##1##2{\markboth{##2}{##1}}          % author//chaptitle
+\def\sectionmark##1{}
+}
+\else               % If one-sided printing.
+\def\ps@headings{\let\@mkboth\markboth
+ \def\@oddfoot{\rightfootline}
+ \def\@evenfoot{\rightfootline}
+ \def\@oddhead{\oddtopleft\hbox{}\small\sc\rightmark\hfill\oddapp\oddtopright}
+ \def\achaptermark##1##2{\markright{##1}}
+ \def\chaptermark##1{\markright {{\ifnum \c@secnumdepth >\m@ne
+  \@chapapp\ \thechapter. \ \fi ##1}}}
+  \def\sectionmark##1{}
+}
+\fi
+\pagestyle{headings}
+
+%\pagestyle{pubsheadings}
+
+
+%% REDEFINE \pagestyle{plain} TO HAVE small page number and optional copyright
+%%                            AND ALLOW raised chapter title
+
+\newif \ifcsli@copyright \csli@copyrightfalse % default is no copyright
+
+\newcommand {\psp@footText} {}
+\newlength  {\psp@raise}    \setlength{\psp@raise}{0pt}
+\newlength  {\psp@width}    \setlength  {\psp@width}{\textwidth}
+                            \addtolength{\psp@width}{-2.222215pt} % empirically
+
+% use \thispagestyle{copyright} to get \thispagestyle{plain} + copyrightBox
+
+\let \LaTeXthispagestyle = \thispagestyle
+\renewcommand {\thispagestyle}[1]          % simulate \thispagestyle{copyright}
+              {\ifthenelse {\equal{#1}{copyright}}
+                           {\ifcsli@copyright \relax \else  % don't duplicate
+                            \csli@copyrighttrue             % = \ps@copyright
+                            \enlargethispage{-\csli@copyrightHeight}%
+                            \LaTeXthispagestyle{plain}%
+                            \fi }
+                           {\ifcsli@copyright               % \ifthenELSE
+                                  \csli@copyrightfalse
+                                  \enlargethispage{\csli@copyrightHeight}%
+                            \else \LaTeXthispagestyle{#1}%
+                            \fi }%
+              }
+
+\renewcommand {\ps@plain}
+{\addtolength {\topmargin} {-\psp@raise}
+ \ifcsli@copyright
+           \renewcommand {\psp@footText}
+                         {\vtop {\hbox to \psp@width{\hfil\small\thepage\hfil}
+                                 \vspace{-\csli@copyrightHeight} \vspace{-3pt}
+                                 \hbox{\usebox{\csli@copyrightBox}}}}
+     \else \renewcommand {\psp@footText}
+                                {\hbox to \psp@width{\hfil\small\thepage\hfil}}
+     \fi
+ \renewcommand {\@evenfoot} {\raisebox {-\psp@raise}[0pt][0pt] {\psp@footText}
+                             \global\setlength {\psp@raise} {0pt}}
+ \renewcommand {\@oddfoot}  {\@evenfoot}
+ \renewcommand {\@evenhead} {\NWdate \hfill}
+ \renewcommand {\@oddhead}  {\hfill \NEdate}
+ \global \csli@copyrightfalse     % Just one copyright at a time.
+}
+
+% Raise/lower a page's top to allow more/less text (meant to follow \chapter{})
+% NOTE: only works with pagestyle{plain}, as for a chapter's opening page
+\newcommand {\raisePageTop}[1]
+{\setlength       {\psp@raise}{#1}
+ \enlargethispage {\psp@raise}
+}
+
+
+%% FLOATS
+
+\setcounter{totalnumber}{50} %max number of floats/page
+
+
+% must use the [] in the \caption[]{Argument}
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \parbox{\hsize}{\small\centering #1\ \ #2}%
+  \vskip\belowcaptionskip}
+
+\def\fnum@table{{\scriptsize\rm TABLE}\ {\footnotesize\rm\thetable}}
+\def\fnum@figure{{\scriptsize\rm FIGURE}\ {\footnotesize\rm\thefigure}}
+
+%% THEOREMS  (double check whether this is needed)
+
+\def\@opargbegintheorem#1#2#3{\trivlist
+      \item[\hskip \labelsep{\bfseries #1\ #2\ {\rmfamily (#3)}}]\itshape}
+
+
+%% TABLE OF CONTENTS
+
+\setcounter{tocdepth}{0}  % default = 0 = show only chapters
+
+% the following may be overridden with \renewcommand
+\newcommand {\widestchapter}    {99}
+\newcommand {\widestsection}    {99.9}
+\newcommand {\widestsubsection} {99.9.9}
+\newcommand {\widestsubsubsec}  {99.9.9.9}
+\newcommand {\widestfigure}     {99.9}
+\newcommand {\widesttable}      {99.9}
+
+\csli@newswitch {\tochasboldchapters} {\iftoc@boldchapters} {}
+
+% the following are set ephemerally by \l@chapter, \l@section and \l@subsection
+\newlength  {\toc@vgap}         % vertical space before contents line
+\newlength  {\toc@inset}        % horizontal inset of contents line
+\newcommand {\toc@numfont}{}    % font for chapter or section number
+\newlength  {\toc@numwidth}     % width of space for chapter or section number
+\newcommand {\toc@namefont}{}   % font for chapter or section title
+\newlength  {\toc@pagegap}      % space between title and page number
+\newcommand {\toc@pagefont}{}   % font for page number
+
+% the following are set by \tableofcontents and \l@section for others to use
+\newlength {\toc@marginchap}    % PERMANENT margin to right of chapter numbers
+\newlength {\toc@marginsec}     % PERMANENT margin to right of section numbers
+\newlength {\toc@marginsubsec}  % PERMANENT margin to right of subsection nums
+
+\newcommand {\toc@setmarginchap}
+            {\global\settowidth {\toc@marginchap}
+                           {\normalfont\normalsize\bfseries \widestchapter~~~}}
+
+\renewcommand* {\numberline}[1] {%  #1 = label such as chapter number
+  \addtolength{\leftskip}{\toc@numwidth}%
+  \llap{\makebox[\toc@numwidth][l]{\toc@numfont #1}}%
+  \ignorespaces
+  }
+
+\newcommand* {\toc@entry}[2] {% #1 = e.g., \numberline{1}Introduction
+  \vspace{\toc@vgap}%         % #2 = page #
+  \begingroup \raggedright
+    \addtolength {\leftskip}    {\toc@inset}%
+    \addtolength {\rightskip}   {\toc@marginchap}% for text but not page #
+    \setlength   {\parindent}   {0pt}
+    \setlength   {\parfillskip} {0pt plus 1fil}
+    \leavevmode
+    \toc@namefont #1\nobreak \hspace{\toc@pagegap}\nobreak
+    \toc@pagefont #2\hspace*{-\toc@marginchap}% page # may reach normal margin
+    \par
+    \penalty\@highpenalty
+  \endgroup
+  }
+
+
+\renewcommand* {\l@part}[2] {% #1 = e.g., Introduction
+                             % #2 = page # (ignored)
+    \addpenalty{-\@highpenalty}%
+    \begingroup
+      \setlength          {\toc@vgap}       {20pt plus3pt minus2pt}%
+      \setlength          {\toc@inset}      {\toc@marginchap}%
+      \renewcommand       {\toc@numfont}    {I G N O R E D}
+      \settowidth         {\toc@numwidth}   {I G N O R E D}
+      \renewcommand       {\toc@namefont}   {\normalfont\large\bfseries}%
+      \setlength          {\toc@pagegap}    {23pt minus5pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\large\bfseries}%
+      \toc@entry{#1}{}%                     % no page #
+    \endgroup
+  }
+
+\renewcommand* {\l@chapter}[2] {% #1 = e.g., \numberline{1}Introduction
+                                % #2 = page #
+    \addpenalty{-\@highpenalty}%
+    \begingroup
+      \setlength          {\toc@vgap}       {12pt plus3pt minus2pt}%
+      \setlength          {\toc@inset}      {0pt}%
+      \renewcommand       {\toc@numfont}    {\normalfont\normalsize\bfseries}%
+      \setlength          {\toc@numwidth}   {\toc@marginchap}%
+      \iftoc@boldchapters
+            \renewcommand {\toc@namefont}   {\normalfont\normalsize\bfseries}%
+      \else \renewcommand {\toc@namefont}   {\normalfont\normalsize}%
+      \fi
+      \setlength          {\toc@pagegap}    {23pt minus5pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\normalsize\bfseries}%
+      \toc@entry{#1}{#2}%
+    \endgroup
+  }
+
+\newcommand* {\l@author}[2] {% #1 = e.g., Pat Smith
+                             % #2 = ignored
+    \begingroup
+      \setlength          {\toc@vgap}       {1pt}%
+      \setlength          {\toc@inset}      {\toc@marginchap}%
+      \renewcommand       {\toc@namefont}   {\normalfont\normalsize\scshape}%
+      \setlength          {\toc@pagegap}    {0pt}%
+      \toc@entry{#1}{}%
+    \endgroup
+    \tochasboldchapters
+  }
+
+\renewcommand* {\l@section}[2] {% #1 = e.g., \numberline{1.1}Introduction
+                                % #2 = page #
+  \ifnum \c@tocdepth > 0  % 1 = show section
+    \begingroup
+      \setlength          {\toc@vgap}       {2pt plus1pt minus1pt}%
+      \setlength          {\toc@inset}      {\toc@marginchap}%
+      \renewcommand       {\toc@numfont}    {\normalfont\normalsize}%
+      \settowidth         {\toc@numwidth}   {\toc@numfont \widestsection~~~}%
+      \renewcommand       {\toc@namefont}   {\normalfont\normalsize}%
+      \setlength          {\toc@pagegap}    {15pt minus3pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\normalsize}%
+      \global\setlength   {\toc@marginsec}  {\toc@marginchap}%
+      \global\addtolength {\toc@marginsec}  {\toc@numwidth}%
+      \toc@entry{#1}{#2}%
+    \endgroup
+    \tochasboldchapters
+  \fi
+  }
+
+\renewcommand* {\l@subsection}[2] {% #1 = e.g., \numberline{1.1.1}Introduction
+                                   % #2 = page #
+  \ifnum \c@tocdepth > 1  % 2 = show subsection
+    \begingroup
+      \setlength          {\toc@vgap}       {2pt minus1pt}%
+      \setlength          {\toc@inset}      {\toc@marginsec}%
+      \renewcommand       {\toc@numfont}    {\normalfont\small}%
+      \settowidth         {\toc@numwidth}   {\toc@numfont \widestsubsection~~}%
+      \renewcommand       {\toc@namefont}   {\normalfont\small}%
+      \setlength          {\toc@pagegap}    {12pt minus2pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\small}%
+      \global\setlength   {\toc@marginsubsec}{\toc@marginsec}%
+      \global\addtolength {\toc@marginsubsec}{\toc@numwidth}%
+      \toc@entry{#1}{#2}%
+    \endgroup
+  \fi
+  }
+
+\renewcommand* {\l@subsubsection}[2] {% #1 = e.g., \numberline{1.1.1.1}Intro
+                                      % #2 = page #
+  \ifnum \c@tocdepth > 2  % 3 = show subsubsection
+    \begingroup
+      \setlength          {\toc@vgap}       {2pt minus1pt}%
+      \setlength          {\toc@inset}      {\toc@marginsubsec}%
+      \renewcommand       {\toc@numfont}    {\normalfont\small}%
+      \settowidth         {\toc@numwidth}   {\toc@numfont \widestsubsubsec~}%
+      \renewcommand       {\toc@namefont}   {\normalfont\small}%
+      \setlength          {\toc@pagegap}    {10pt minus2pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\small}%
+      \toc@entry{#1}{#2}%
+    \endgroup
+  \fi
+  }
+
+\renewcommand* {\l@figure}[2] {% #1 = e.g., \numberline{1.1}Road Map
+                               % #2 = page #
+    \addpenalty{-\@highpenalty}%
+    \begingroup
+      \setlength          {\toc@vgap}       {2.5pt plus1pt minus1pt}%
+      \setlength          {\toc@inset}      {0pt}%
+      \renewcommand       {\toc@numfont}    {\normalfont\normalsize\bfseries}%
+      \settowidth         {\toc@numwidth}   {\toc@numfont \widestfigure~~~}%
+      \renewcommand       {\toc@namefont}   {\normalfont\normalsize}%
+      \setlength          {\toc@pagegap}    {23pt minus5pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\normalsize\bfseries}%
+      \toc@entry{#1}{#2}%
+    \endgroup
+  }
+
+\renewcommand* {\l@table}[2] {% #1 = e.g., \numberline{1.1}Distances
+                              % #2 = page #
+    \addpenalty{-\@highpenalty}%
+    \begingroup
+      \setlength          {\toc@vgap}       {2.5pt plus1pt minus1pt}%
+      \setlength          {\toc@inset}      {0pt}%
+      \renewcommand       {\toc@numfont}    {\normalfont\normalsize\bfseries}%
+      \settowidth         {\toc@numwidth}   {\toc@numfont \widesttable~~~}%
+      \renewcommand       {\toc@namefont}   {\normalfont\normalsize}%
+      \setlength          {\toc@pagegap}    {23pt minus5pt}%
+      \renewcommand       {\toc@pagefont}   {\normalfont\normalsize\bfseries}%
+      \toc@entry{#1}{#2}%
+    \endgroup
+  }
+
+
+\renewcommand\tableofcontents{%
+    \toc@setmarginchap
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+%        \@mkboth{%
+%           \@title}{\contentsname}
+}%
+    \let\csli@forText=\csli@noshow \let\csli@forContents=\csli@show
+    \@starttoc{toc}%
+    \let\csli@forText=\csli@show \let\csli@forContents=\csli@noshow
+    \if@restonecol\twocolumn\fi
+    }
+
+
+% The following switch omits "Appendix" before appendix's letter in Contents
+
+\newif \ifappendixContentsLetterOnly  \appendixContentsLetterOnlyfalse
+
+
+
+%% LIST OF TABLES and LIST OF FIGURES
+
+                           \let \LaTeXlistoffigures = \listoffigures
+                           \let \LaTeXlistoftables =  \listoftables
+\renewcommand {\listoffigures} {\addcontentsline{toc}{chapter}{List of Figures}
+                                \LaTeXlistoffigures}
+\renewcommand {\listoftables}  {\addcontentsline{toc}{chapter}{List of Tables}
+                                \LaTeXlistoftables}
+
+
+%% CONTRIBUTORS page(s) (should follow \tableofcontents in a collected volume)
+
+\newenvironment{contributors}
+               {\chapter{Contributors}
+                \begin{list}{}{\renewcommand{\makelabel}[1]{\textsc{##1} }
+                               \setlength{\leftmargin}{0pt}
+                               \setlength{\labelwidth}{0pt}
+                               \setlength{\labelsep}{0pt}
+                               \setlength{\itemsep}{1ex minus .2ex}}
+               }
+               {\end{list}}
+
+
+
+%% ACKNOWLEDGMENTS SECTION
+
+\newcommand {\acknowledgments} {\section*{Acknowledgments}}
+
+
+
+
+%% CHAPTER'S REFERENCE SECTION
+
+\newenvironment{referencesection}
+               {\section*{References}
+                \addcontentsline{toc}{section}{References}
+                \markright{References}
+                \small \frenchspacing
+                \setlength   {\parskip}  {1pt plus 2pt}
+                \addtolength {\parindent}{\serifindent} % due to smaller serifs
+                \addtolength {\leftskip} {\parindent}   % for hanging indent
+                \setlength   {\parindent}{-\parindent}  % for hanging indent
+                \@afterindenttrue                       % for hanging indent
+                }
+               {}
+
+
+%% REFERENCES (meant for use with natbib.sty)
+
+\newcommand {\csli@revisebibforsection}         % currently only for natbib.sty
+            {\global\def \bibsection
+                                {\section*{References}
+                                 \addcontentsline{toc}{section}{References}
+                                 \markright{References}
+                                 \small \frenchspacing}
+            }
+
+\newcommand {\csli@revisebibforchapter}         % currently only for natbib.sty
+            {\global\def \bibsection
+                                {\chapter*{References}
+                                 \addcontentsline{toc}{chapter}{References}
+                                 \markboth{\@title}{References}
+                                 \small \frenchspacing}
+            }
+
+
+
+%% INDEX
+
+\def\thesubjindex{\cleardoublepage
+                 \if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \raggedright     % no right-margin justification
+                \small           % 9-pt text
+                \columnseprule \z@
+                \columnsep 35\p@
+                \twocolumn[\@makestcchapterhead{Subject Index}]%
+                 \addcontentsline{toc}{chapter}{Subject Index}%
+                \@mkboth{\@title}%
+                        {\indexname}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+
+\def\thenameindex{\cleardoublepage
+                 \if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \raggedright     % no right-margin justification
+                \small           % 9-pt text
+                \columnseprule \z@
+                \columnsep 35\p@
+                \twocolumn[\@makestcchapterhead{Name Index}]%
+                 \addcontentsline{toc}{chapter}{Name Index}%
+                \@mkboth{\@title}%
+                        {\indexname}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+
+\renewenvironment{theindex}
+               {\cleardoublepage
+                 \if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \raggedright     % no right-margin justification
+                \small           % 9-pt text
+                \columnseprule \z@
+                \columnsep 35\p@
+                \twocolumn[\@makestcchapterhead{\indexname}]%
+                 \addcontentsline{toc}{chapter}{\indexname}%
+                \@mkboth{\@title}%
+                        {\indexname}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+
+\renewcommand\@idxitem[1][16]{\par\hangindent #1\p@}
+\renewcommand\subitem{\@idxitem[24]\hspace*{8\p@}}
+\renewcommand\subsubitem{\@idxitem[32]\hspace*{16\p@}}
+\renewcommand\indexspace{\par \vskip 8\p@ \@plus2\p@ \@minus1\p@\relax}
+
+% allows for margin notes of index entries.
+
+\newif\ifshowindex \showindexfalse
+
+ \def\INS#1{\ifshowindex%
+   \index{#1}
+   \marginpar{\mbox{}\raggedright\scriptsize\rm #1}%
+   \else%
+   \index{#1}%
+   \fi}
+
+ \def\INA#1{\ifshowindex%
+   \index{ZZZ-#1}%
+   \marginpar{\mbox{}\raggedright\scriptsize\rm #1}%
+   \else%
+   \index{ZZZ-#1}%
+   \fi}
+
+
+
+%% MISCELLANY
+
+
+% \NOTE{Dude!} inserts a marginal note for the author
+\newcommand {\NOTE} [1] {\ifDRAFT \marginpar{\raggedright #1} \fi}
+
+
+
+%% FORMAT MISCELLANY
+
+
+% To be able to turn off blank pages (esp. for APS output)
+\newif\ifblankpages
+
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+   \ifblankpages
+    \thispagestyle{empty} % added to clear heading
+    \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi
+   \else\addtocounter{page}{1}\fi\fi\fi}
+
+
+%% default settings
+
+\normalfont\normalsize
+
+\emergencystretch = .02\textwidth  % stretch per line to avoid margin overhangs
+
+\blankpagestrue          % default = show blank pages
+
+\frenchspacing           % default = no extra spaces at ends of sentences
+
+
+\ifISSUE
+   \AtBeginDocument
+      {\let \frontmatter = \relax
+       \let \mainmatter  = \relax
+       \let \backmatter  = \relax
+       \renewcommand {\thepage} {\roman{page}}
+       \makeltitle
+       \thispagestyle{empty} \strut \newpage
+       \renewcommand {\thepage} {\arabic{page}}
+       \renewcommand\thesection{\arabic{section}}
+       \setcounter{page}{1}
+       \lchapter
+      }
+\fi % end of \ifISSUE
+
