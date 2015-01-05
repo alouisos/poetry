@@ -3,7 +3,7 @@ library(plyr)
 library(reshape2)
 source("~/Dropbox/Work/Grad_school/Research/Utilities/summarySE.R")
 
-style <- read.csv("~/Dropbox/Work/Grad_school/Research/Computational poetics/Data/allFeatures.csv")
+style <- read.csv("~/Dropbox/Work/Grad_school/Research/Computational poetics/poetry/Data/allFeatures.csv")
 style$Type <- factor(style$Type, levels=c("19th", "Poet", "Amateur"),
                           labels=c("19th century professional", "Contemporary professional", "Contemporary amateur"))
 style$imagist <- factor(style$imagist, levels=c(0, 1), labels=c("no", "yes"))
@@ -85,22 +85,22 @@ t.test(style.19.non$concreteness, style.19.imagist$concreteness)
 style.prof <- rbind(style.19, style.21)
 
 style.prof.long <- melt(data=style.prof, id.vars=c("Type", "Poem.poet", "year", "imagist", "time", "expertise"),
-                   measure.vars=c(#"wordLength", 
-                                  #"wordFreq",
+                   measure.vars=c("wordLength", 
+                                  "wordFreq",
                                   "alliterationFreq", 
                                   "assonanceFreq", 
-                                  #"consonanceFreq",
+                                  "consonanceFreq",
                                   "slantEndRhymeFreq", 
-                                  "perfectEndRhymeFreq" 
-                                  #"identityEndRhymeFreq"
-                                  #"emotWords",
-                                  #"valence", 
-                                  #"arousal", 
-                                  #"typeTokenRatio",
-                                  #"concreteness", 
-                                  #"imageability" 
-                                  #"objectWords", 
-                                  #"abstractWords",
+                                  "perfectEndRhymeFreq", 
+                                  "identityEndRhymeFreq",
+                                  "emotWords",
+                                  "valence", 
+                                  "arousal", 
+                                  "typeTokenRatio",
+                                  "concreteness", 
+                                  "imageability",
+                                  "objectWords", 
+                                  "abstractWords"
                                   ))
 
 ggplot(style.prof.long, aes(x=year, y=value, color=Type, shape=imagist)) +
@@ -119,13 +119,26 @@ with(style.prof, cor.test(year, concreteness))
 with(style.19, cor.test(year, concreteness))
 with(style.21, cor.test(year, concreteness))
 
-ggplot(style.prof, aes(x=year, y=imageability, color=Type, shape=imagist)) +
+style.prof$group <- ifelse(style.prof$time == "modern" | style.prof$imagist == "yes", "new", "old")
+style.prof$group <- factor(style.prof$group)
+lm.year <- lm(data=style.prof, concreteness ~ year)
+lm.year.group <- lm(data=style.prof, concreteness ~ year + group)
+lm.group <- lm(data=style.prof, concreteness ~ group)
+anova(lm.year, lm.year.group)
+anova(lm.group, lm.year.group)
+
+style.prof$color <- ifelse(style.prof$imagist == "yes" | style.prof$time == "modern", 
+                           "1",
+                           "0")
+
+ggplot(style.prof, aes(x=year, y=concreteness, color=color, shape=imagist)) +
   geom_point(size=3) +
   theme_bw() +
   scale_shape_manual(values=c(1, 17), labels=c("Other", "Imagist"), name="") +
-  scale_color_manual(values=c("#023858", "#fb9a99"), labels=c("19th", "Contemporary"), name="") +
+  scale_color_manual(values=c("#023858", "#993333"), 
+                    name="", labels=c("Non-Imagist 19th century poets", "Imagists and contemporary poets")) +
   xlab("Year born") +
-  ylab("End rhyme frequency (z-scored)")
+  ylab("Concreteness (z-scored)")
 
 t.test(style.19.non$imageability, style.19.imagist$imageability)
 t.test(style.19$imageability, style.21$imageability)
@@ -221,15 +234,15 @@ ggplot(measure.summary, aes(x=time, y=measure, shape=expertise, color=time)) +
 # Remove amateur
 ###########################
 style.noAmateur <- subset(style, Type!="Contemporary amateur")
-items <- style.noAmateur[,1:4]
+items <- style.noAmateur[,1:6]
 #measures.norm <- apply(measures, 2, function(x) (x - min(x))/(max(x) - min(x)))
 
-measures <- scale(style.noAmateur[,5:ncol(style.noAmateur)])
+measures <- scale(style.noAmateur[,7:ncol(style.noAmateur)])
 ###########################
 # Keep amateur
 ###########################
-items <- style[,1:2]
-measures <- scale(style[,3:ncol(style)])
+items <- style[,1:6]
+measures <- scale(style[,7:ncol(style)])
 
 ############################
 # Create z scored data frame
@@ -244,10 +257,10 @@ style.z$simpleSound <- style.z$alliterationFreq + style.z$perfectEndRhymeFreq + 
 
 style.long <- melt(data=style.z, id.vars=c("Type", "Poem.poet"),
                    measure.vars=c("wordLength", 
-                                  #"wordFreq",
+                                  "wordFreq",
                                               "alliterationFreq", "assonanceFreq", "consonanceFreq",
                                   "slantEndRhymeFreq", "perfectEndRhymeFreq", 
-                                  #"identityEndRhymeFreq",
+                                  "identityEndRhymeFreq",
                                               "valence", "arousal", "typeTokenRatio",
                                               "concreteness", "imageability", "objectWords", 
                                   "abstractWords", "emotWords"))
@@ -273,7 +286,7 @@ style.long$variable <- factor(style.long$variable, levels=c("objectWords",
                                                             "emotWords",
                                                             "valence",
                                                             "arousal",
-                                                            #"identityEndRhymeFreq",
+                                                            "identityEndRhymeFreq",
                                                             "perfectEndRhymeFreq",
                                                             "alliterationFreq",
                                                             "slantEndRhymeFreq",
@@ -281,16 +294,16 @@ style.long$variable <- factor(style.long$variable, levels=c("objectWords",
                                                             "assonanceFreq",
                                                             "wordLength",
                                                             
-                                                            #"wordFreq",
+                                                            "wordFreq",
                                                             "typeTokenRatio"
                                                             ),
                               labels=c("Object", "Abstract", "Imageability", "Concreteness",
                                        "Emotion", "Valence", "Arousal",
-                                       #"IdentityEndRhyme", 
+                                       "IdentityEndRhyme", 
                                        "PerfectEndRhyme", "Alliteration",
                                        "SlantEndRhyme", "Consonance", "Assonance",
                                        "WordLength", 
-                                       #"WordFreq", 
+                                       "WordFreq", 
                                        "TypeTokenRatio"))
 
 my.colors <- c("#756bb1", "#9ebcda", "#e7e1ef")
@@ -326,9 +339,12 @@ style.long.summary <- summarySE(style.long, groupvars=c("Type", "variable", "fea
 
 style.long.summary$valueBoost <- style.long.summary$value + 1
 
-ggplot(style.long.summary, aes(x=variable, y=valueBoost, fill=Type)) +
+#ggplot(style.long.summary, aes(x=variable, y=value, color=Type)) +
+ggplot(style.long.summary, aes(x=variable, y=value, fill=Type)) +
   geom_bar(stat="identity", color="black", position="dodge") +
-  geom_errorbar(aes(ymin=valueBoost-se, ymax=valueBoost+se), width=0.2, position=position_dodge(0.9)) +
+  #geom_point() +
+  #geom_errorbar(aes(ymin=value-se, ymax=value+se), width=0.05) +
+  geom_errorbar(aes(ymin=value-se, ymax=value+se), width=0.2, position=position_dodge(0.9)) +
   facet_grid(.~featureType, scales="free", space="free") +
   theme_bw() +
   #scale_x_discrete(limits=c("objectWords", "abstractWords", "imageability", "concreteness")) +
@@ -414,6 +430,36 @@ with(subset(style.long, variable=="wordCount"), pairwise.t.test(value, Type, p.a
 with(subset(style.long, variable=="avgWordLength"), pairwise.t.test(value, Type, p.adj = "none"))
 with(subset(style.long, variable=="typeTokenRatio"), pacfirwise.t.test(value, Type, p.adj = "none"))
 
+##########################
+# Compare feature means
+##########################
+style.long.mean <- aggregate(data=style.long, value ~ Type + variable + featureType, FUN=mean)
+style.wide.mean <- reshape(data=style.long.mean, v.names="value", timevar="Type", idvar="variable", direction="wide")
+colnames(style.wide.mean) <- c("feature", "featureType", "oldProf", "contempProf", "contempAmateur")
+style.wide.mean$distToContemp <- style.wide.mean$contempAmateur - style.wide.mean$contempProf
+style.wide.mean$distTo19th <- style.wide.mean$contempAmateur - style.wide.mean$oldProf
+
+style.wide.mean.long <- melt(data=style.wide.mean, id.vars=c("feature", "featureType"), 
+                                measure.vars=c("distToContemp", "distTo19th"))
+style.wide.mean.long$variable <- factor(style.wide.mean.long$variable, levels=c("distTo19th", "distToContemp"),
+                                        labels=c("19th century professional", "Contemporary professional"))
+
+t.test(abs(subset(style.wide.mean.long, variable=="19th century professional")$value), 
+       abs(subset(style.wide.mean.long, variable=="Contemporary professional")$value))
+
+ggplot(style.wide.mean.long, aes(x=feature, y=-value, fill=variable)) +
+  geom_bar(color="black", stat="identity", position="dodge") +
+  facet_grid(.~featureType, scales="free", space="free") +
+  theme_bw() +
+  xlab("") +
+  ylab("Mean difference") +
+  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(),
+        axis.text.x  = element_text(angle=90, vjust=0.5, hjust=1, size=16),
+        axis.text.y = element_text(size=14), axis.title.y = element_text(size=16),
+        strip.text.x = element_text(size=16),
+        legend.title = element_text(size=0), legend.text = element_text(size=14),
+        legend.position = "top") +
+  scale_fill_manual(name="Poet", values=my.colors)
 ################
 # compare concreteness and imageability
 ################
