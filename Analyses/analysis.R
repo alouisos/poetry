@@ -358,6 +358,40 @@ ggplot(style.long.summary, aes(x=variable, y=value, fill=Type)) +
         legend.position = "top") +
   scale_fill_manual(name="Poet", values=my.colors)
 
+t.test(subset(style.long, Type=="Contemporary professional" & variable=="Object")$value,
+       subset(style.long, Type=="19th century professional" & variable=="Object")$value)
+t.test(subset(style.long, Type=="Contemporary professional" & variable=="Abstract")$value,
+       subset(style.long, Type=="19th century professional" & variable=="Abstract")$value)
+t.test(subset(style.long, Type=="Contemporary professional" & variable=="Concreteness")$value,
+       subset(style.long, Type=="19th century professional" & variable=="Concreteness")$value)
+t.test(subset(style.long, Type=="Contemporary professional" & variable=="Imageability")$value,
+       subset(style.long, Type=="19th century professional" & variable=="Imageability")$value)
+
+t.test(subset(style.long, Type=="Contemporary professional" & variable=="Emotion")$value,
+       subset(style.long, Type=="19th century professional" & variable=="Emotion")$value)
+t.test(subset(style.long, Type=="Contemporary professional" & variable=="Valence")$value,
+       subset(style.long, Type=="19th century professional" & variable=="Valence")$value)
+t.test(subset(style.long, Type=="19th century professional" & variable=="Arousal")$value,
+       subset(style.long, Type=="Contemporary professional" & variable=="Arousal")$value)
+
+t.test(subset(style.long, Type=="19th century professional" & variable=="PerfectEndRhyme")$value,
+       subset(style.long, Type=="Contemporary professional" & variable=="PerfectEndRhyme")$value)
+t.test(subset(style.long, Type=="19th century professional" & variable=="SlantEndRhyme")$value,
+       subset(style.long, Type=="Contemporary professional" & variable=="SlantEndRhyme")$value)
+t.test(subset(style.long, Type=="19th century professional" & variable=="Assonance")$value,
+       subset(style.long, Type=="Contemporary professional" & variable=="Assonance")$value)
+
+t.test(subset(style.long, Type=="19th century professional" & variable=="WordLength")$value,
+       subset(style.long, Type=="Contemporary professional" & variable=="WordLength")$value)
+t.test(subset(style.long, Type=="19th century professional" & variable=="WordFreq")$value,
+       subset(style.long, Type=="Contemporary professional" & variable=="WordFreq")$value)
+
+
+
+
+
+
+
 # ggplot(style.long.summary.image, aes(x=Type, y=value, fill=Type)) +
 #   geom_bar(stat="identity", color="black") +
 #   geom_errorbar(aes(ymin=value-se, ymax=value+se), width=0.2) +
