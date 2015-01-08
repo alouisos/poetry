@@ -5,42 +5,42 @@ The style file: apa-good.bst
 Database file #1: mybib.bib
 You've used 29 entries,
             2804 wiz_defined-function locations,
-            758 strings with 8788 characters,
-and the built_in function-call counts, 15250 in all, are:
-= -- 1224
-> -- 552
-< -- 26
-+ -- 223
-- -- 180
-* -- 1064
-:= -- 2426
+            754 strings with 8684 characters,
+and the built_in function-call counts, 15007 in all, are:
+= -- 1202
+> -- 535
+< -- 27
++ -- 219
+- -- 174
+* -- 1029
+:= -- 2397
 add.period$ -- 87
 call.type$ -- 29
-change.case$ -- 201
+change.case$ -- 198
 chr.to.int$ -- 29
 cite$ -- 29
-duplicate$ -- 1140
-empty$ -- 1192
-format.name$ -- 249
-if$ -- 2997
+duplicate$ -- 1124
+empty$ -- 1182
+format.name$ -- 241
+if$ -- 2954
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 243
+missing$ -- 240
 newline$ -- 152
 num.names$ -- 116
-pop$ -- 471
+pop$ -- 469
 preamble$ -- 1
-purify$ -- 176
+purify$ -- 174
 quote$ -- 0
-skip$ -- 476
+skip$ -- 478
 stack$ -- 0
-substring$ -- 658
-swap$ -- 585
+substring$ -- 635
+swap$ -- 568
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 231
+type$ -- 228
 warning$ -- 0
-while$ -- 113
+while$ -- 111
 width$ -- 0
-write$ -- 373
+write$ -- 372
