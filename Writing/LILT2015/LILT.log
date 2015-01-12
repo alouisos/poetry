@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  8 JAN 2015 14:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  12 JAN 2015 01:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -48,16 +48,54 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \toc@marginsec=\skip54
 \toc@marginsubsec=\skip55
 )
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip56
+\LTright=\skip57
+\LTpre=\skip58
+\LTpost=\skip59
+\LTchunksize=\count89
+\LTcapwidth=\dimen103
+\LT@head=\box26
+\LT@firsthead=\box27
+\LT@foot=\box28
+\LT@lastfoot=\box29
+\LT@cols=\count90
+\LT@rows=\count91
+\c@LT@tables=\count92
+\c@LT@chunks=\count93
+\LT@p@ftn=\toks14
+)
 (/usr/local/texlive/2013/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip56
-\bibsep=\skip57
+\bibhang=\skip60
+\bibsep=\skip61
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count89
+\c@NAT@ctr=\count94
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/cite/chapterbib.sty
-\c@inputfile=\count90
+\c@inputfile=\count95
 Package: chapterbib 2010/09/18  v 1.17
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen104
+\lightrulewidth=\dimen105
+\cmidrulewidth=\dimen106
+\belowrulesep=\dimen107
+\belowbottomsep=\dimen108
+\aboverulesep=\dimen109
+\abovetopsep=\dimen110
+\cmidrulesep=\dimen111
+\cmidrulekern=\dimen112
+\defaultaddspace=\dimen113
+\@cmidla=\count96
+\@cmidlb=\count97
+\@aboverulesep=\dimen114
+\@belowrulesep=\dimen115
+\@thisruleclass=\count98
+\@lastruleclass=\count99
+\@thisrulewidth=\dimen116
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
@@ -73,7 +111,7 @@ Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks14
+\KV@toks@=\toks15
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
@@ -95,18 +133,18 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count91
+\Gread@gobject=\count100
 ))
-\Gin@req@height=\dimen103
-\Gin@req@width=\dimen104
+\Gin@req@height=\dimen117
+\Gin@req@width=\dimen118
 )
-\epsfxsize=\dimen105
-\epsfysize=\dimen106
+\epsfxsize=\dimen119
+\epsfysize=\dimen120
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks15
-\inpenc@posthook=\toks16
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/latin1.def
 File: latin1.def 2008/03/30 v1.1d Input encoding file
@@ -126,39 +164,39 @@ Language: english 2012/08/20 v3.3p English support from the babel system
 
 (/usr/local/texlive/2013/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2013/05/16 v3.9f Babel common definitions
-\babel@savecnt=\count92
-\U@D=\dimen107
+\babel@savecnt=\count101
+\U@D=\dimen121
 )
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
 )) (./gb4e.sty
 (./cgloss4e.sty
-\lineone=\box26
-\linetwo=\box27
-\linethree=\box28
-\wordone=\box29
-\wordtwo=\box30
-\wordthree=\box31
-\gline=\box32
-\glossglue=\skip58
+\lineone=\box30
+\linetwo=\box31
+\linethree=\box32
+\wordone=\box33
+\wordtwo=\box34
+\wordthree=\box35
+\gline=\box36
+\glossglue=\skip62
 )
-\c@fnx=\count93
-\@xnumdepth=\count94
-\c@xnumi=\count95
-\c@xnumii=\count96
-\c@xnumiii=\count97
-\c@xnumiv=\count98
-\c@exx=\count99
-\c@rxnumi=\count100
-\c@rxnumii=\count101
-\c@rxnumiii=\count102
-\c@rxnumiv=\count103
-\lcommentsep=\skip59
+\c@fnx=\count102
+\@xnumdepth=\count103
+\c@xnumi=\count104
+\c@xnumii=\count105
+\c@xnumiii=\count106
+\c@xnumiv=\count107
+\c@exx=\count108
+\c@rxnumi=\count109
+\c@rxnumii=\count110
+\c@rxnumiii=\count111
+\c@rxnumiv=\count112
+\lcommentsep=\skip63
 )
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks17
+\@emptytoks=\toks18
 \symAMSa=\mathgroup5
 \symAMSb=\mathgroup6
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
@@ -167,26 +205,26 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (./LILT.aux)
 \openout1 = `LILT.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-\csli@copyrightBox=\box33
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+\csli@copyrightBox=\box37
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 45.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 43.
-\csli@copyrightHeight=\skip60
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 45.
+\csli@copyrightHeight=\skip64
 
 [1
 
@@ -196,17 +234,17 @@ Seems to be a collected volume (says liltcsli.sty).
 Chapter 1.
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
-\scratchdimen=\dimen108
-\scratchbox=\box34
-\nofMPsegments=\count105
-\nofMParguments=\count106
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count107
-\MPscratchDim=\dimen109
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
-\everyMPtoPDFconversion=\toks19
+\scratchcounter=\count113
+\scratchdimen=\dimen122
+\scratchbox=\box38
+\nofMPsegments=\count114
+\nofMParguments=\count115
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen123
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
+\everyMPtoPDFconversion=\toks20
 ) (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -267,16 +305,16 @@ Underfull \vbox (badness 3547) has occurred while \output is active []
 
  [3]
 [4]
-LaTeX Font Info:    Try loading font information for U+lasy on input line 91.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 93.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 91.
+LaTeX Font Info:    Try loading font information for U+msa on input line 93.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 91.
+LaTeX Font Info:    Try loading font information for U+msb on input line 93.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -285,10 +323,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ../../Analyses/figure1.pdf Graphic file (type pdf)
 
 <use ../../Analyses/figure1.pdf>
-Package pdftex.def Info: ../../Analyses/figure1.pdf used on input line 146.
+Package pdftex.def Info: ../../Analyses/figure1.pdf used on input line 148.
 (pdftex.def)             Requested size: 867.2379pt x 433.61894pt.
 
-Overfull \hbox (22.40714pt too wide) in paragraph at lines 146--148
+Overfull \hbox (22.40714pt too wide) in paragraph at lines 148--150
 [][] 
  []
 
@@ -300,18 +338,18 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: ../../Analyses/figure2.pdf Graphic file (type pdf)
 
 <use ../../Analyses/figure2.pdf>
-Package pdftex.def Info: ../../Analyses/figure2.pdf used on input line 166.
+Package pdftex.def Info: ../../Analyses/figure2.pdf used on input line 168.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
  [10] [11 <../../Analyses/figure2.pdf>]
 <../../Analyses/figure3-raw.pdf, id=78, 867.24pt x 433.62pt>
 File: ../../Analyses/figure3-raw.pdf Graphic file (type pdf)
 
 <use ../../Analyses/figure3-raw.pdf>
-Package pdftex.def Info: ../../Analyses/figure3-raw.pdf used on input line 200.
+Package pdftex.def Info: ../../Analyses/figure3-raw.pdf used on input line 202.
 
 (pdftex.def)             Requested size: 867.2379pt x 433.61894pt.
 
-Overfull \hbox (22.40714pt too wide) in paragraph at lines 200--202
+Overfull \hbox (22.40714pt too wide) in paragraph at lines 202--204
 [][] 
  []
 
@@ -329,45 +367,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--76
 \T1/cmr/m/n/9 Con-tem-po-rary Amer-i-can En-glish (COCA).  Down-loaded from
  []
 
-) [19] (./LILT.aux) ) 
+) [19]
+Overfull \hbox (45.46863pt too wide) in paragraph at lines 312--391
+[][] 
+ []
+
+
+Overfull \hbox (38.60919pt too wide) in paragraph at lines 395--428
+[][] 
+ []
+
+[20]
+Overfull \hbox (19.54146pt too wide) in paragraph at lines 433--482
+[][] 
+ []
+
+
+Overfull \hbox (54.05386pt too wide) in paragraph at lines 486--551
+[][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[21]
+
+LaTeX Warning: Float too large for page by 37.14157pt on input line 672.
+
+[22] [23] (./LILT.aux) ) 
 Here is how much of TeX's memory you used:
- 3215 strings out of 493315
- 42562 string characters out of 6137904
- 115262 words of memory out of 5000000
- 6571 multiletter control sequences out of 15000+600000
- 27473 words of font info for 72 fonts, out of 8000000 for 9000
+ 3361 strings out of 493315
+ 44407 string characters out of 6137904
+ 140716 words of memory out of 5000000
+ 6708 multiletter control sequences out of 15000+600000
+ 28239 words of font info for 73 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,9n,25p,3414b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cm-sup
-er/cm-super-t1.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ti7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx070
-0.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1000.
-pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pf
-b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfcc0900.pfb></usr/
-local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/lo
-cal/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/loca
-l/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/te
-xlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texl
-ive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texliv
-e/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/
-2013/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/20
-13/texmf-dist/fonts/type1/public/cm-super/sfti0700.pfb></usr/local/texlive/2013
-/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2013/t
-exmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2013/tex
-mf-dist/fonts/type1/public/cm-super/sfxc0900.pfb>
-Output written on LILT.pdf (21 pages, 481211 bytes).
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cm-
+super/cm-super-t1.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx
+0700.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx10
+00.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1095
+.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1200.p
+fb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><
+/usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfcc0900.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0500.pfb></usr/l
+ocal/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/loc
+al/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local
+/texlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/tex
+live/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texli
+ve/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive
+/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2
+013/texmf-dist/fonts/type1/public/cm-super/sfti0700.pfb></usr/local/texlive/201
+3/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2013/
+texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2013/te
+xmf-dist/fonts/type1/public/cm-super/sfxc0900.pfb>
+Output written on LILT.pdf (25 pages, 534743 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
+ 209 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
