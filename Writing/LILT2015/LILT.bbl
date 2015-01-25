@@ -1,4 +1,4 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{33}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{{\tt #1}}\fi
@@ -68,6 +68,11 @@ Coltheart, M. (1981).
 \newblock {\em The Quarterly Journal of Experimental Psychology\/}, {\em
   33\/}(4), 497--505.
 
+\bibitem[{Dalvean(2013)}]{dalvean2013ranking}
+Dalvean, M. (2013).
+\newblock Ranking contemporary american poems.
+\newblock {\em Literary and Linguistic Computing\/}, (p. fqt036).
+
 \bibitem[{Davies(2011)}]{COCA}
 Davies, M. (2011).
 \newblock Word frequency data from the {C}orpus of {C}ontemporary {A}merican
@@ -84,6 +89,12 @@ Hamilton, C.~A. (2004).
 \newblock Toward a cognitive rhetoric of imagism.
 \newblock {\em STYLE-FAYETTEVILLE-\/}, {\em 38\/}(4), 468.
 
+\bibitem[{Holmes(1985)}]{holmes1985analysis}
+Holmes, D.~I. (1985).
+\newblock The analysis of literary style--a review.
+\newblock {\em Journal of the Royal Statistical Society. Series A (General)\/},
+  (pp. 328--341).
+
 \bibitem[{Jessen et~al.(2000)Jessen, Heun, Erb, Granath, Klose,
   Papassotiropoulos, \& Grodd}]{neuro}
 Jessen, F., Heun, R., Erb, M., Granath, D.~O., Klose, U., Papassotiropoulos,
@@ -92,11 +103,23 @@ Jessen, F., Heun, R., Erb, M., Granath, D.~O., Klose, U., Papassotiropoulos,
   availability.
 \newblock {\em Brain and Language\/}, {\em 74\/}(1), 103 -- 112.
 
+\bibitem[{Kao \& Jurafsky(2012)}]{kao2012computational}
+Kao, J., \& Jurafsky, D. (2012).
+\newblock A computational analysis of style, affect, and imagery in
+  contemporary poetry.
+\newblock In {\em In Proceedings of the NAACL-HLT 2012 Workshop on
+  Computational Linguistics for Literature. Montreal, Canada\/}, (pp. 8--17).
+
 \bibitem[{Kaplan(2006)}]{Kaplan}
 Kaplan, D. (2006).
 \newblock Computational analysis and visualized comparison of style in american
   poetry.
 \newblock Unpublished undergraduate thesis.
+
+\bibitem[{Kaplan \& Blei(2007)}]{Kaplan+Blei}
+Kaplan, D., \& Blei, D. (2007).
+\newblock A computational approach to style in american poetry.
+\newblock In {\em IEEE Conference on Data Mining\/}.
 
 \bibitem[{Lowell(1920)}]{lowell1920tendencies}
 Lowell, A. (1920).
@@ -137,15 +160,16 @@ Pratt, W. (1992).
 \newblock Imagism and the shape of english poetry.
 \newblock {\em Pratt, W. and Richardson, R. eds\/}, (pp. 75--96).
 
-\bibitem[{Richards(1893)}]{critic}
-Richards, I. (1893).
-\newblock {\em Practical criticism: a study of literary judgment\/}.
-\newblock Transaction Publishers.
-
 \bibitem[{Simmel(1957)}]{simmel1957fashion}
 Simmel, G. (1957).
 \newblock Fashion.
 \newblock {\em American journal of sociology\/}, (pp. 541--558).
+
+\bibitem[{Stamatatos et~al.(2000)Stamatatos, Fakotakis, \&
+  Kokkinakis}]{stamatatos2000automatic}
+Stamatatos, E., Fakotakis, N., \& Kokkinakis, G. (2000).
+\newblock Automatic text categorization in terms of genre and author.
+\newblock {\em Computational linguistics\/}, {\em 26\/}(4), 471--495.
 
 \bibitem[{Stone et~al.(1966)Stone, Dunphry, Smith, \& Ogilvie}]{Inquirer+1966}
 Stone, P., Dunphry, D., Smith, M., \& Ogilvie, D. (1966).

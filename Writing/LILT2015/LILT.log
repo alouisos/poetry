@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  12 JAN 2015 01:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  24 JAN 2015 18:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -301,10 +301,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [2
 
 ]
-Underfull \vbox (badness 3547) has occurred while \output is active []
-
- [3]
-[4]
+[3] [4]
 LaTeX Font Info:    Try loading font information for U+lasy on input line 93.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -323,10 +320,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ../../Analyses/figure1.pdf Graphic file (type pdf)
 
 <use ../../Analyses/figure1.pdf>
-Package pdftex.def Info: ../../Analyses/figure1.pdf used on input line 148.
+Package pdftex.def Info: ../../Analyses/figure1.pdf used on input line 147.
 (pdftex.def)             Requested size: 867.2379pt x 433.61894pt.
 
-Overfull \hbox (22.40714pt too wide) in paragraph at lines 148--150
+Overfull \hbox (22.40714pt too wide) in paragraph at lines 147--149
 [][] 
  []
 
@@ -345,11 +342,11 @@ Package pdftex.def Info: ../../Analyses/figure2.pdf used on input line 168.
 File: ../../Analyses/figure3-raw.pdf Graphic file (type pdf)
 
 <use ../../Analyses/figure3-raw.pdf>
-Package pdftex.def Info: ../../Analyses/figure3-raw.pdf used on input line 202.
+Package pdftex.def Info: ../../Analyses/figure3-raw.pdf used on input line 201.
 
 (pdftex.def)             Requested size: 867.2379pt x 433.61894pt.
 
-Overfull \hbox (22.40714pt too wide) in paragraph at lines 202--204
+Overfull \hbox (22.40714pt too wide) in paragraph at lines 201--203
 [][] 
  []
 
@@ -357,52 +354,53 @@ Overfull \hbox (22.40714pt too wide) in paragraph at lines 202--204
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
-[13 <../../Analyses/figure3-raw.pdf>] [14] [15] [16] [17] (./LILT.bbl [18]
-Underfull \hbox (badness 5161) in paragraph at lines 72--76
+[13 <../../Analyses/figure3-raw.pdf>] [14] [15] [16] [17] [18] (./LILT.bbl
+[19]
+Underfull \hbox (badness 5161) in paragraph at lines 77--81
 []\T1/cmr/m/n/9 Davies, M. (2011).  Word fre-quency data from the Cor-pus of
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--76
+Underfull \hbox (badness 10000) in paragraph at lines 77--81
 \T1/cmr/m/n/9 Con-tem-po-rary Amer-i-can En-glish (COCA).  Down-loaded from
  []
 
-) [19]
-Overfull \hbox (45.46863pt too wide) in paragraph at lines 312--391
+[20]) [21]
+Overfull \hbox (45.46863pt too wide) in paragraph at lines 325--404
 [][] 
  []
 
 
-Overfull \hbox (38.60919pt too wide) in paragraph at lines 395--428
+Overfull \hbox (38.60919pt too wide) in paragraph at lines 408--441
 [][] 
  []
 
-[20]
-Overfull \hbox (19.54146pt too wide) in paragraph at lines 433--482
+[22]
+Overfull \hbox (19.54146pt too wide) in paragraph at lines 446--495
 [][] 
  []
 
 
-Overfull \hbox (54.05386pt too wide) in paragraph at lines 486--551
+Overfull \hbox (54.05386pt too wide) in paragraph at lines 499--564
 [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21]
+[23]
 
-LaTeX Warning: Float too large for page by 37.14157pt on input line 672.
+LaTeX Warning: Float too large for page by 37.14157pt on input line 685.
 
-[22] [23] (./LILT.aux) ) 
+[24] [25] (./LILT.aux) ) 
 Here is how much of TeX's memory you used:
- 3361 strings out of 493315
- 44407 string characters out of 6137904
- 140716 words of memory out of 5000000
- 6708 multiletter control sequences out of 15000+600000
+ 3373 strings out of 493315
+ 44755 string characters out of 6137904
+ 140876 words of memory out of 5000000
+ 6720 multiletter control sequences out of 15000+600000
  28239 words of font info for 73 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,9n,25p,3414b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,9n,25p,3414b,443s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cm-
 super/cm-super-t1.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
@@ -430,10 +428,10 @@ ve/2013/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive
 3/texmf-dist/fonts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2013/
 texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texlive/2013/te
 xmf-dist/fonts/type1/public/cm-super/sfxc0900.pfb>
-Output written on LILT.pdf (25 pages, 534743 bytes).
+Output written on LILT.pdf (27 pages, 538760 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 148 compressed objects within 2 object streams
+ 215 PDF objects out of 1000 (max. 8388607)
+ 152 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

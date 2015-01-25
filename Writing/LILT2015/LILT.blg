@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: LILT.aux
 The style file: apa-good.bst
 Database file #1: mybib.bib
-You've used 29 entries,
+You've used 33 entries,
             2804 wiz_defined-function locations,
-            754 strings with 8684 characters,
-and the built_in function-call counts, 15007 in all, are:
-= -- 1202
-> -- 535
-< -- 27
-+ -- 219
-- -- 174
-* -- 1029
-:= -- 2397
-add.period$ -- 87
-call.type$ -- 29
-change.case$ -- 198
-chr.to.int$ -- 29
-cite$ -- 29
-duplicate$ -- 1124
-empty$ -- 1182
-format.name$ -- 241
-if$ -- 2954
+            778 strings with 9405 characters,
+and the built_in function-call counts, 17546 in all, are:
+= -- 1428
+> -- 610
+< -- 33
++ -- 253
+- -- 198
+* -- 1196
+:= -- 2762
+add.period$ -- 99
+call.type$ -- 33
+change.case$ -- 231
+chr.to.int$ -- 33
+cite$ -- 33
+duplicate$ -- 1326
+empty$ -- 1375
+format.name$ -- 279
+if$ -- 3477
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 240
-newline$ -- 152
-num.names$ -- 116
-pop$ -- 469
+missing$ -- 272
+newline$ -- 172
+num.names$ -- 132
+pop$ -- 542
 preamble$ -- 1
-purify$ -- 174
+purify$ -- 198
 quote$ -- 0
-skip$ -- 478
+skip$ -- 577
 stack$ -- 0
-substring$ -- 635
-swap$ -- 568
-text.length$ -- 5
+substring$ -- 773
+swap$ -- 680
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 228
+type$ -- 267
 warning$ -- 0
-while$ -- 111
+while$ -- 132
 width$ -- 0
-write$ -- 372
+write$ -- 424
