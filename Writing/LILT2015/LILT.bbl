@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{34}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{{\tt #1}}\fi
@@ -16,6 +16,12 @@ Aldington, R., Doolittle, H., Fletcher, J.~G., Flint, F.~S., Lawrence, D.~H.,
   \& Lowell, A. (1916).
 \newblock {\em Some Imagist Poets: An Anthology\/}, vol.~2.
 \newblock Houghton Mifflin Company.
+
+\bibitem[{Ashok et~al.(2013)Ashok, Feng, \& Choi}]{ashok}
+Ashok, V.~G., Feng, S., \& Choi, Y. (2013).
+\newblock Success with style: Using writing style to predict the success of
+  novels.
+\newblock In {\em EMNLP 2013\/}, (pp. 1753--1764).
 
 \bibitem[{Baumann(2007)}]{baumann2007general}
 Baumann, S. (2007).
